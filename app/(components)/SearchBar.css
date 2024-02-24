@@ -1,0 +1,8 @@
+.searchBar {
+  font-size: 14px;
+}
+
+.searchBar::placeholder {
+  padding-left: 10px;
+  color: #61646e;
+}
