@@ -90,7 +90,7 @@ function ContactForm({ contactData }) {
           <Link href={"../"}>
             <p className="text-bleuc1">Cancel</p>
           </Link>
-          <p className="font-bold text-lg mt-1">{contactData.prenom}</p>
+          <p className="font-bold text-lg mt-1"> {contactData ? contactData.prenom : "New Contact"} </p>
           <input
             type="submit"
             className="text-bleuc1 cursor-pointer"
