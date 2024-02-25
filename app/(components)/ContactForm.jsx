@@ -1,47 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-function ContactForm({contactData}) {
+function ContactForm({ contactData }) {
 
-    const editMode = contactData && contactData._id === "update";
-  
-
+  useEffect(() => {
+    if (contactData) {
+      setFormData({
+        favorite: contactData.favorite,
+        prenom: contactData.prenom,
+        nom: contactData.nom,
+        tel: contactData.tel,
+        email: contactData.email,
+      });
+    }
+  }, [contactData]);
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-
-
-
-    if (editMode) {
+    if (contactData) {
         const res = await fetch(`/api/Contacts/${contactData._id}`, {
           method: "PUT",
+          headers: {
+            "Content-Type": "application/json" // Utilisation de headers pour spécifier le type de contenu
+          },
           body: JSON.stringify(formData),
-          "content-type": "application/json",
         });
-  
-        if (!res.ok) {
-          throw new Error("Failed to update Contact");
-        }
-      }else {
-        const res = await fetch("/api/Contacts", {
-            method: "POST",
-            body: JSON.stringify(formData), // Envoi direct des données du formulaire
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-    
-        if (!res.ok) {
-          throw new Error("Failed to create Contact");
-        }
+
+      if (!res.ok) {
+        throw new Error("Failed to update Contact");
       }
+    } else {
+      const res = await fetch("/api/Contacts", {
+        method: "POST",
+        body: JSON.stringify(formData), // Envoi direct des données du formulaire
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to create Contact");
+      }
+    }
 
     router.push("/");
     router.refresh();
@@ -54,24 +60,24 @@ function ContactForm({contactData}) {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const startingContactData = {
-    favorite: false,
-    prenom: "",
-    nom: "",
-    tel: "",
-    email: "",
-  };
 
-  if(editMode){
-    startingContactData["favorite"] = contactData.favorite;
-    startingContactData["prenom"] = contactData.prenom;
-    startingContactData["nom"] = contactData.nom;
-    startingContactData["tel"] = contactData.tel;
-    startingContactData["email"] = contactData.email;
-
-  }
-
-  const [formData, setFormData] = useState(startingContactData);
+  const [formData, setFormData] = useState(
+    contactData
+      ? {
+          favorite: contactData.favorite,
+          prenom: contactData.prenom,
+          nom: contactData.nom,
+          tel: contactData.tel,
+          email: contactData.email,
+        }
+      : {
+          favorite: false,
+          prenom: "",
+          nom: "",
+          tel: "",
+          email: "",
+        }
+  );
 
   return (
     <div>
@@ -81,10 +87,10 @@ function ContactForm({contactData}) {
         onSubmit={handleSubmit}
       >
         <div className="flex justify-between mt-8">
-        <Link href={'../'}>
-          <p className="text-bleuc1">Cancel</p>
-        </Link>
-          <p className="font-bold text-lg mt-1">New Contact</p>
+          <Link href={"../"}>
+            <p className="text-bleuc1">Cancel</p>
+          </Link>
+          <p className="font-bold text-lg mt-1">{contactData.prenom}</p>
           <input
             type="submit"
             className="text-bleuc1 cursor-pointer"
@@ -93,7 +99,12 @@ function ContactForm({contactData}) {
         </div>
 
         <div className="flex flex-col">
-          <h3 className="font-bold text-2xl"> {editMode ? `update ${contactData.prenom}` : "Create your Contact"} </h3>
+          <h3 className="font-bold text-2xl">
+            
+            {contactData
+              ? `Update ${contactData.prenom}`
+              : "Create your Contact"}
+          </h3>
           <div className="flex gap-2 items-center">
             <p className="text-xs text-bleuc1">Favorite</p>
             <input

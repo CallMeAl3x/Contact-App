@@ -20,6 +20,6 @@ export async function GET(){
 
     }
     catch(err){
-        return NextResponse({message: "Failed",err},{status:500})
+        return NextResponse({message: "Failed to get infos",err},{status:500})
     }
 }

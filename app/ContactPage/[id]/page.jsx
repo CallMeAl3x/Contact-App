@@ -9,7 +9,7 @@ const getContactDataById = async (id) => {
   });
 
   if (!res.ok) {
-    throw new Error("Failed");
+    throw new Error("Failed to get data");
   }
 
   return res.json();
@@ -18,41 +18,36 @@ const getContactDataById = async (id) => {
 async function page({ params }) {
   const addContact = params.id === "new";
   const editMode = params.id === "update";
-  
 
   let contactData = {};
   let premierelettreprenom = "";
   let premierelettreprenom2 = "";
-  if (!addContact && !editMode) {
+
+  if (!addContact) {
     const response = await getContactDataById(params.id);
     contactData = response.foundContact;
     premierelettreprenom = contactData.prenom[0];
-    premierelettreprenom2 = premierelettreprenom.toUpperCase(); // Déplacez cette ligne ici
-    // Assignez la valeur ici
-
-  } else {
-    contactData = {
-      _id: "new",
-    };
+    premierelettreprenom2 = premierelettreprenom.toUpperCase();
   }
 
+  // Nouvelle variable pour stocker le résultat de contactData
+  const formDataToSend = { ...contactData };
   
 
-  const affForm = async() => {
+  const affForm = async () => {
     if (addContact) {
       return (
         <>
           <ContactForm />
         </>
       );
-    } else if(editMode){
-      const response = await getContactDataById(params.id);
-      contactData = response.foundContact;
-        return <>
-            <ContactForm contactData={contactData} />
+    } else if (editMode) {
+      return (
+        <>
+          <ContactForm contactData={formDataToSend} />
         </>
-    }
-    else {
+      );
+    } else {
       return (
         <>
           <div className="flex justify-between mt-8">
@@ -60,8 +55,8 @@ async function page({ params }) {
               <p className="text-bleuc1">Cancel</p>
             </Link>
             <p className="font-bold text-lg mt-1"> {contactData.prenom} </p>
-            <Link href={`/ContactPage/update`}>
-            <button className="text-bleuc1">Edit</button>
+            <Link href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
+              <button className="text-bleuc1">Edit</button>
             </Link>
           </div>
 
@@ -91,7 +86,7 @@ async function page({ params }) {
             </div>
 
             <div className="flex justify-center">
-                <DeleteContact id={contactData._id}/>
+              <DeleteContact id={contactData._id} />
             </div>
           </div>
         </>

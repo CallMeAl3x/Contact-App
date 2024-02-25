@@ -27,7 +27,7 @@ export async function DELETE(req, { params }) {
 
   export async function PUT(req, { params }) {
     try {
-      const id = params;
+      const id = params.id;
       const body = await req.json();
       const updateContactData = await Contact.findByIdAndUpdate(id,{
           ...body
