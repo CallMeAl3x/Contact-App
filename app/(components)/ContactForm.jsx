@@ -82,11 +82,11 @@ function ContactForm({ contactData }) {
   return (
     <div>
       <form
-        className="flex flex-col gap-3 mt-12"
+        className="flex flex-col gap-3 sm:mt-12"
         method="post"
         onSubmit={handleSubmit}
       >
-        <div className="flex justify-between mt-8">
+        <div className="flex justify-between mt-8 items-center">
           <Link href={"../"}>
             <p className="text-bleuc1">Cancel</p>
           </Link>
@@ -99,13 +99,13 @@ function ContactForm({ contactData }) {
         </div>
 
         <div className="flex flex-col">
-          <h3 className="font-bold text-2xl">
+          <h3 className="font-bold text-2xl text-center sm:text-left mt-4 mb-4">
             
             {contactData
               ? `Update ${contactData.prenom}`
               : "Create your Contact"}
           </h3>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center mt-4 mb-4">
             <p className="text-xs text-bleuc1">Favorite</p>
             <input
               type="checkbox"
@@ -117,7 +117,7 @@ function ContactForm({ contactData }) {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center gap-3 p-4 bg-gris1 rounded-lg">
+        <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg">
           <input
             type="text"
             onChange={handleChange}
@@ -136,9 +136,9 @@ function ContactForm({ contactData }) {
           />
         </div>
 
-        <div className="flex flex-col justify-center gap-3 p-4 bg-gris1 rounded-lg">
+        <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg">
           <input
-            type="text"
+            type="tel"
             onChange={handleChange}
             name="tel"
             placeholder="Telephone"
@@ -146,7 +146,7 @@ function ContactForm({ contactData }) {
             value={formData.tel}
           />
           <input
-            type="text"
+            type="email"
             onChange={handleChange}
             name="email"
             placeholder="Email"

@@ -9,7 +9,16 @@
     text-wrap: balance;
   }
 
+  .placeholder-style::placeholder {
+    padding: 5px 12px;
+    margin: 5px;
+ }
   
+}
+
+
+input {
+  color: white;
 }
 
 h1,

@@ -5,7 +5,7 @@ import Parameters from "./Parameters";
 
 function Top() {
   return (
-    <div className="flex gap-8 ">
+    <div className="flex gap-2">
       <div className="flex-grow-1">
         <SearchBar />
       </div>

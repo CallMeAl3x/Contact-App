@@ -50,7 +50,7 @@ async function page({ params }) {
     } else {
       return (
         <>
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between mt-8 items-center">
             <Link href={"../"}>
               <p className="text-bleuc1">Cancel</p>
             </Link>
@@ -67,7 +67,7 @@ async function page({ params }) {
           </div>
 
           <div className="flex flex-col gap-8">
-            <div className="flex flex-col justify-center gap-3 p-4 bg-gris1 rounded-lg mt-8">
+            <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg mt-8">
               <div className="border-b-2 border-vertclair1">
                 <p>{contactData.prenom}</p>
               </div>
@@ -81,7 +81,7 @@ async function page({ params }) {
                 <p>{contactData.tel}</p>
               </div>
               <div className="border-b-2 border-vertclair1">
-                <p>{contactData.email}</p>
+                <p className="truncate">{contactData.email}</p>
               </div>
             </div>
 

@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} bg-[#000000] `} >
-        <div className="h-screen bg-[#000000] w-[80%] mx-auto">
+        <div className="h-screen bg-[#000000] mx-6">
           <div className="mt-8 ">
             <div className="flex justify-center">
               <Top />

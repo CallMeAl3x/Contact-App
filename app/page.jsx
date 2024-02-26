@@ -25,12 +25,12 @@ export default async function Home() {
   
   return (
     <main className="flex flex-col h-full">
-      <div className="flex mt-4">
-        <div className="h-16 w-16 rounded-full bg-white outlineperso2 flex items-center justify-center">
-          <Image src={photovide} alt="photo" />
+      <div className="flex mt-8 gap-2 sm:gap-6 mb-4 ">
+        <div className="w-24 sm:h-16 rounded-full bg-white outlineperso2 flex items-center justify-center">
+          <Image src={photovide} className="w-[31px] h-[31px]" alt="photo" />
         </div>
-        <div className="my-auto ml-4">
-          <h2>Alexandre Bonefons (Me)</h2>
+        <div className="my-auto">
+          <h2 className="truncate w-fit">Alexandre Bonefons (Me)</h2>
           <div className="flex gap-2">
             <p className="text-sm text-[#9D9D9D]">0 contact</p>
             <span className="text-[#9D9D9D]">°</span>
@@ -46,15 +46,15 @@ export default async function Home() {
     {contacts.map((contact)=>(
       <>
       <Link href={`/ContactPage/${contact._id}`}>
-        <div className="bg-gris1 p-3 flex justify-between mt-4 rounded-lg">
-          <div className="flex items-center">
+        <div className="bg-gris1 p-3 flex justify-between mt-4 rounded-lg w-full ">
+          <div className="flex items-center w-[72%]">
             <div className="h-8 w-8  outlineperso2 rounded-full flex justify-center items-center">
             <p className=""> {contact.prenom ? contact.prenom[0].toUpperCase() : '?'} </p>
             
             </div>
-            <p className="ml-4"> {contact.prenom} {contact.nom} </p>
+            <p className="ml-4 truncate w-[70%]"> {contact.prenom} {contact.nom} </p>
           </div>
-          <div className="flex items-center mr-4 gap-4">
+          <div className="flex items-center mr-1 gap-4 ml-auto">
             <div className="h-6 w-6 bg-[#D9D9D9] rounded-full flex justify-center items-center shadowcontact">
               <Image src={tel} alt="tel" width={18} height={18} />
             </div>
