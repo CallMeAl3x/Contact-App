@@ -42,14 +42,13 @@ export default async function Home() {
             </div>
             <div className="flex mt-8 gap-2 sm:gap-6 mb-4 ">
               <div className="w-16 h-16 rounded-full bg-white outlineperso2 flex items-center justify-center">
-                <Image
-                  src={photovide}
-                  className="w-[31px] h-[31px]"
-                  alt="photo"
-                />
+                {session?.user?.image && (
+                  <img src={session.user.image} alt="User Profile" />
+                )}
               </div>
               <div className="my-auto ml-2">
-                <h2 className="truncate w-fit">Alexandre Bonefons (Me)</h2>
+                <h2 className="truncate w-fit">{session?.user?.name} (Me)</h2>
+                <p className="text-xs"> {session.user.email} </p>
                 <div className="flex gap-2">
                   <p className="text-sm text-[#9D9D9D]">
                     {reversedContacts.length > 1
@@ -124,7 +123,10 @@ export default async function Home() {
             <>
               <div className="h-[90vh] w-full flex justify-center items-center">
                 <div className="w-32 h-32 outlineperso2 rounded-full flex justify-center items-center">
-                  <Link href={"/api/auth/signin"} className="text-white text-3xl">
+                  <Link
+                    href={"/api/auth/signin"}
+                    className="text-white text-3xl"
+                  >
                     Login
                   </Link>
                 </div>
