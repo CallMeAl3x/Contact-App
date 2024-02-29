@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -12,10 +10,8 @@
   .placeholder-style::placeholder {
     padding: 5px 12px;
     margin: 5px;
- }
-  
+  }
 }
-
 
 input {
   color: white;
@@ -28,7 +24,7 @@ h4,
 h5,
 h6,
 p {
-  color: white
+  color: white;
 }
 .outlineperso1 {
   @apply outline outline-offset-[6px] outline-vertclair1 outline-2;
@@ -38,7 +34,6 @@ p {
   @apply outline outline-offset-[3px] outline-vertclair1 outline-1;
 }
 
-
-.shadowcontact{
+.shadowcontact {
   box-shadow: 0px 0px 10px 2px #4cd96370;
 }
