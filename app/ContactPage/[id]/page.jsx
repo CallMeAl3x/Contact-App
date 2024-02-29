@@ -26,13 +26,14 @@ async function page({ params }) {
   if (!addContact) {
     const response = await getContactDataById(params.id);
     contactData = response.foundContact;
-    premierelettreprenom = contactData.prenom[0];
-    premierelettreprenom2 = premierelettreprenom.toUpperCase();
+    if (contactData.prenom) {
+      premierelettreprenom = contactData.prenom[0];
+      premierelettreprenom2 = premierelettreprenom.toUpperCase();
+    }
   }
 
   // Nouvelle variable pour stocker le résultat de contactData
   const formDataToSend = { ...contactData };
-  
 
   const affForm = async () => {
     if (addContact) {
@@ -54,8 +55,10 @@ async function page({ params }) {
             <Link href={"../"}>
               <p className="text-bleuc1">Cancel</p>
             </Link>
-            <p className="font-bold text-lg mt-1"> {contactData.prenom} </p>
-            <Link href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
+
+            <Link
+              href={`/ContactPage/${contactData._id}/update/${contactData._id}`}
+            >
               <button className="text-bleuc1">Edit</button>
             </Link>
           </div>
@@ -65,6 +68,9 @@ async function page({ params }) {
               <p className="text-5xl">{premierelettreprenom2}</p>
             </div>
           </div>
+          <p className="font-bold text-lg mt-4 text-center">
+            {contactData.prenom}
+          </p>
 
           <div className="flex flex-col gap-8">
             <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg mt-8">

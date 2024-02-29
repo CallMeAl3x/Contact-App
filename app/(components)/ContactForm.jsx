@@ -27,7 +27,7 @@ function ContactForm({ contactData }) {
         const res = await fetch(`/api/Contacts/${contactData._id}`, {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json" // Utilisation de headers pour spécifier le type de contenu
+            "Content-Type": "application/json" 
           },
           body: JSON.stringify(formData),
         });
@@ -38,7 +38,7 @@ function ContactForm({ contactData }) {
     } else {
       const res = await fetch("/api/Contacts", {
         method: "POST",
-        body: JSON.stringify(formData), // Envoi direct des données du formulaire
+        body: JSON.stringify(formData), 
         headers: {
           "Content-Type": "application/json",
         },
