@@ -41,14 +41,22 @@ export default async function Home() {
               <Top />
             </div>
             <div className="flex mt-8 gap-2 sm:gap-6 mb-4 ">
-              <div className="w-16 h-16 rounded-full bg-white outlineperso2 flex items-center justify-center">
-                {session?.user?.image && (
-                  <img src={session.user.image} alt="User Profile" />
+              <div className={`w-16 h-16 rounded-full ${session?.user?.image ? "" : "bg-white"} outlineperso2 flex items-center justify-center`}>
+                {(session?.user?.image) ? (
+                  <img
+                    src={session.user.image}
+                    alt="User Profile"
+                    className="h-full w-full rounded-full"
+                  />
+                ):(
+                  <>
+                  <img src={photovide} alt="" className="rounded-full w-full h-full" />
+                  </>
                 )}
               </div>
               <div className="my-auto ml-2">
                 <h2 className="truncate w-fit">{session?.user?.name} (Me)</h2>
-                <p className="text-xs"> {session.user.email} </p>
+                <p className="text-xs text-[#9D9D9D]"> {session.user.email} </p>
                 <div className="flex gap-2">
                   <p className="text-sm text-[#9D9D9D]">
                     {reversedContacts.length > 1
@@ -70,6 +78,8 @@ export default async function Home() {
           </span>
         </>
       )}
+
+      <img src={email} alt="" />
       {reversedContacts.length > 0 && session ? (
         <>
           {reversedContacts.map((contact) => (

@@ -70,7 +70,7 @@ export const options = {
             if (match) {
               delete foundUser.password
       
-              foundUser["role"] = "Unverified Email ";
+              foundUser["role"] = "Unverified Email";
               return foundUser
             }
           }
