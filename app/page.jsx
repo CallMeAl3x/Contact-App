@@ -79,7 +79,7 @@ export default async function Home() {
         </>
       )}
 
-      <img src={email} alt="" />
+      
       {reversedContacts.length > 0 && session ? (
         <>
           {reversedContacts.map((contact) => (
