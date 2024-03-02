@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Top from "./(components)/Top";
+import Modal from "./(components)/Modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,12 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.className} bg-[#000000] `} >
         <div className="h-screen bg-[#000000] mx-6">
-          <div className="mt-8 ">
-            <div className="flex justify-center">
-              <Top />
-            </div>
+          <div className="mt-4">
             {children}
           </div>
+          <Modal/>
         </div>
       </body>
     </html>

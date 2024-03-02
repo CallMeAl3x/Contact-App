@@ -5,6 +5,7 @@ import box from "./Images/dropbox-logo-svgrepo-com.svg";
 import email from "./Images/email-svgrepo-com.svg";;
 import tel from "./Images/phone-svgrepo-com.svg"
 import Link from "next/link";
+import Top from "./(components)/Top";
 const getContacts = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/Contacts", {
@@ -17,16 +18,17 @@ const getContacts = async () => {
 };
 
 export default async function Home() {
-
-
-   
+    
 
   const { contacts } = await getContacts();
   
   return (
     <main className="flex flex-col h-full">
+      <div className="flex justify-center mt-4">
+        <Top />
+      </div>
       <div className="flex mt-8 gap-2 sm:gap-6 mb-4 ">
-        <div className="w-24 sm:h-16 rounded-full bg-white outlineperso2 flex items-center justify-center">
+        <div className="w-24 sm:h-16 sm:w-16 rounded-full bg-white outlineperso2 flex items-center justify-center">
           <Image src={photovide} className="w-[31px] h-[31px]" alt="photo" />
         </div>
         <div className="my-auto">

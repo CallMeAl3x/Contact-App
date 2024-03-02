@@ -50,7 +50,7 @@ async function page({ params }) {
     } else {
       return (
         <>
-          <div className="flex justify-between mt-8 items-center">
+          <div className="flex justify-between items-center">
             <Link href={"../"}>
               <p className="text-bleuc1">Cancel</p>
             </Link>
