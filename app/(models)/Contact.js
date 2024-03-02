@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-mongoose.connect("mongodb+srv://bonprealexmax:abmpabmp@cluster0.j4n5edy.mongodb.net/ContactApp2");
+mongoose.connect("mongodb+srv://mp3:mp1234@cluster0.9yfjvv7.mongodb.net/AppDB");
 mongoose.Promise = global.Promise;
 
 const contactSchema = new Schema(
