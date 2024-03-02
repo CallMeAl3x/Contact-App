@@ -37,9 +37,21 @@ function ContactFav({ id, contactfav }) {
       transition={{ duration: 0.4 }} // Durée de l'animation
     >
       {contactfav ? (
-        <Image src={starplain} width={30} height={30} alt="star" className="stars" />
+        <Image
+          src={starplain}
+          width={25}
+          height={25}
+          alt="star"
+          className="stars"
+        />
       ) : (
-        <Image src={starnoplain} width={30} height={30} alt="star" className="stars"/>
+        <Image
+          src={starnoplain}
+          width={25}
+          height={25}
+          alt="star"
+          className="stars"
+        />
       )}
     </motion.div>
   );

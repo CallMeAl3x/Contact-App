@@ -41,3 +41,7 @@ p {
 .shadowcontact {
   box-shadow: 0px 0px 10px 2px #4cd96370;
 }
+
+img {
+  max-width: none;
+}

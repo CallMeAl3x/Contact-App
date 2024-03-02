@@ -1,16 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
-import photovide from "./Images/photovide.svg";
+import avatar from "/public/avatar.svg";
 import chevron from "./Images/chevron.svg";
 import box from "./Images/dropbox-logo-svgrepo-com.svg";
-import email from "./Images/email-svgrepo-com.svg";
-import tel from "./Images/phone-svgrepo-com.svg";
+import email from "/public/mail.svg";
+import tel from "/public/tel.svg";
 import Link from "next/link";
 import Top from "./(components)/Top";
 import { getServerSession } from "next-auth";
 import ContactFav from "./(components)/ContactFav";
 import { options } from "./api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
-import Exit from "./(components)/Exit";
 
 const getContacts = async () => {
   try {
@@ -41,16 +40,23 @@ export default async function Home() {
               <Top />
             </div>
             <div className="flex mt-8 gap-2 sm:gap-6 mb-4 ">
-              <div className={`w-16 h-16 rounded-full ${session?.user?.image ? "" : "bg-white"} outlineperso2 flex items-center justify-center`}>
-                {(session?.user?.image) ? (
+              <div
+                className={`w-16 h-16 rounded-full ${
+                  session?.user?.image ? "" : "bg-white"
+                } outlineperso2 flex items-center justify-center`}>
+                {session?.user?.image ? (
                   <img
                     src={session.user.image}
                     alt="User Profile"
                     className="h-full w-full rounded-full"
                   />
-                ):(
+                ) : (
                   <>
-                  <img src={photovide} alt="" className="rounded-full w-full h-full" />
+                    <img
+                      src={avatar}
+                      alt=""
+                      className="rounded-full w-full h-full"
+                    />
                   </>
                 )}
               </div>
@@ -79,37 +85,32 @@ export default async function Home() {
         </>
       )}
 
-      
       {reversedContacts.length > 0 && session ? (
         <>
           {reversedContacts.map((contact) => (
             <>
               <Link href={`/ContactPage/${contact._id}`}>
                 <div className="bg-gris1 p-3 flex justify-between mt-4 rounded-lg w-full ">
-                  <div className="flex items-center w-[72%]">
+                  <div className="flex items-center w-[66%]">
                     <div className="h-8 w-8  outlineperso2 rounded-full flex justify-center items-center">
                       <p className="">
                         {contact.prenom ? contact.prenom[0].toUpperCase() : "?"}
                       </p>
                     </div>
-                    <div className="ml-4 truncate w-[70%] flex">
+                    <div className="ml-4 truncate w-[50%] flex">
                       <p>
                         {contact.prenom} {contact.nom}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center mr-1 gap-4 ml-auto">
+                  <div className="flex items-center gap-2 ml-auto mr-3">
                     <ContactFav
                       id={contact._id}
                       contactfav={contact.favorite}
                     />
-                    <div className="h-6 w-6 bg-[#D9D9D9] rounded-full flex justify-center items-center shadowcontact">
-                      <Image src={tel} alt="tel" width={18} height={18} />
-                    </div>
+                    <Image src={tel} alt="tel" width={25} height={25} />
 
-                    <div className="h-6 w-6 bg-[#D9D9D9] rounded-full flex justify-center items-center shadowcontact">
-                      <Image src={email} alt="mail" width={16} height={16} />
-                    </div>
+                    <Image src={email} alt="mail" width={25} height={25} />
                   </div>
                 </div>
               </Link>
@@ -121,12 +122,14 @@ export default async function Home() {
           {session ? (
             <>
               <div className="w-full h-[50vh] flex justify-center items-center">
-                <div className="w-48 h-48 rounded-full bg-white border border-x-emerald-500 flex flex-col justify-center items-center outlineperso1">
-                  <Image src={box} alt="box" width={96} />
-                  <p className="text-vertclair1 font-bold text-base">
-                    No contact yet
-                  </p>
-                </div>
+                <Link href={"/ContactPage/new"}>
+                  <div className="w-48 h-48 rounded-full bg-white border border-x-emerald-500 flex flex-col justify-center items-center outlineperso1">
+                    <Image src={box} alt="box" width={96} />
+                    <p className="text-vertclair1 font-bold text-base">
+                      No contact yet
+                    </p>
+                  </div>
+                </Link>
               </div>
             </>
           ) : (
@@ -135,8 +138,7 @@ export default async function Home() {
                 <div className="w-32 h-32 outlineperso2 rounded-full flex justify-center items-center">
                   <Link
                     href={"/api/auth/signin"}
-                    className="text-white text-3xl"
-                  >
+                    className="text-white text-3xl">
                     Login
                   </Link>
                 </div>
