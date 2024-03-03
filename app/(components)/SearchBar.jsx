@@ -1,14 +1,22 @@
 "use client";
-import { useNavigation } from "next/navigation";
 import React, { useState } from "react";
+import useStore from "../store";
+
 function SearchBar() {
-  const [searchValue, setSearchValue] = useState("");
+  const { setSearchValue } = useStore();
+  const [localSearchValue, setLocalSearchValue] = useState("");
+
+  const handleInputChange = (e) => {
+    const newValue = e.target.value;
+    setLocalSearchValue(newValue);
+    setSearchValue(newValue); // Mise à jour de la valeur dans le store Zustand
+  };
 
   return (
     <div>
       <label
         htmlFor="default-search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+        className="mb-2 text-sm font-medium sr-only dark:text-white">
         Search
       </label>
       <div className="relative">
@@ -31,8 +39,9 @@ function SearchBar() {
         <input
           id="default-search"
           type="search"
-          value={searchValue}
-          className="block w-full p-2 bg-gris1 ps-10 text-sm text-gray-900 rounded-lg dark:bg-gray-700  dark:text-white sm:w-[27rem]"
+          value={localSearchValue}
+          onChange={handleInputChange}
+          className="block w-full p-2 bg-gris1 ps-10 text-sm rounded-lg dark:bg-gray-700  dark:text-white sm:w-[27rem]"
           placeholder="Search"
           required
         />

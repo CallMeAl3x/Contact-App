@@ -10,6 +10,7 @@ import Top from "./(components)/Top";
 import { getServerSession } from "next-auth";
 import ContactFav from "./(components)/ContactFav";
 import { options } from "./api/auth/[...nextauth]/options";
+import ContactsDisplay from "./(components)/ContactsDisplay";
 
 const getContacts = async () => {
   try {
@@ -24,7 +25,6 @@ const getContacts = async () => {
 
 export default async function Home() {
   const session = await getServerSession(options);
-
   const { contacts } = await getContacts();
   const reversedContacts = contacts.reverse();
   const favoriteContacts = reversedContacts.filter(
@@ -82,6 +82,7 @@ export default async function Home() {
               </div>
             </div>
           </span>
+          <ContactsDisplay contacts={contacts} />
         </>
       )}
 
