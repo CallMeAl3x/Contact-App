@@ -10,7 +10,6 @@ import Top from "./(components)/Top";
 import { getServerSession } from "next-auth";
 import ContactFav from "./(components)/ContactFav";
 import { options } from "./api/auth/[...nextauth]/options";
-import ContactsDisplay from "./(components)/ContactsDisplay";
 
 const getContacts = async () => {
   try {
@@ -82,7 +81,6 @@ export default async function Home() {
               </div>
             </div>
           </span>
-          <ContactsDisplay contacts={contacts} />
         </>
       )}
 

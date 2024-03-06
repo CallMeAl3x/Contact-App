@@ -1,15 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import useStore from "../store";
 
 function SearchBar() {
-  const { setSearchValue } = useStore();
-  const [localSearchValue, setLocalSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
-  const handleInputChange = (e) => {
-    const newValue = e.target.value;
-    setLocalSearchValue(newValue);
-    setSearchValue(newValue); // Mise à jour de la valeur dans le store Zustand
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+    onSearchChange(event.target.value); // Appeler cette fonction chaque fois que la valeur change
   };
 
   return (
@@ -39,7 +36,7 @@ function SearchBar() {
         <input
           id="default-search"
           type="search"
-          value={localSearchValue}
+          value={searchValue}
           onChange={handleInputChange}
           className="block w-full p-2 bg-gris1 ps-10 text-sm rounded-lg dark:bg-gray-700  dark:text-white sm:w-[27rem]"
           placeholder="Search"
