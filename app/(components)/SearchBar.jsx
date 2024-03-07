@@ -1,13 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import React from "react";
 
-function SearchBar() {
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleInputChange = (event) => {
-    setSearchValue(event.target.value);
-    onSearchChange(event.target.value); // Appeler cette fonction chaque fois que la valeur change
-  };
+function SearchBar(placeholder) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  function handleSearch(term) {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set("contact", term);
+    } else {
+      params.delete("contact");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }
 
   return (
     <div>
@@ -36,11 +43,13 @@ function SearchBar() {
         <input
           id="default-search"
           type="search"
-          value={searchValue}
-          onChange={handleInputChange}
+          onChange={(e) => {
+            handleSearch(e.target.value);
+          }}
           className="block w-full p-2 bg-gris1 ps-10 text-sm rounded-lg dark:bg-gray-700  dark:text-white sm:w-[27rem]"
-          placeholder="Search"
+          placeholder="Search a specific contact"
           required
+          defaultValue={searchParams.get("contact")?.toString()}
         />
       </div>
     </div>

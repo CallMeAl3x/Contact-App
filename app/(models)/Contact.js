@@ -19,6 +19,4 @@ const contactSchema = new Schema(
 const Contact =
   mongoose.models.Contact || mongoose.model("Contact", contactSchema);
 
-console.log(Contact.schema); // Afficher le schéma du modèle dans la console
-
 export default Contact;

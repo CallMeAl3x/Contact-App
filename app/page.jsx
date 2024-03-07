@@ -10,6 +10,7 @@ import Top from "./(components)/Top";
 import { getServerSession } from "next-auth";
 import ContactFav from "./(components)/ContactFav";
 import { options } from "./api/auth/[...nextauth]/options";
+import React from "react";
 
 const getContacts = async () => {
   try {
@@ -87,7 +88,7 @@ export default async function Home() {
       {reversedContacts.length > 0 && session ? (
         <>
           {reversedContacts.map((contact) => (
-            <>
+            <React.Fragment key={contact._id}>
               <Link href={`/ContactPage/${contact._id}`}>
                 <div className="bg-gris1 p-3 flex justify-between mt-4 rounded-lg w-full ">
                   <div className="flex items-center w-[66%]">
@@ -107,13 +108,19 @@ export default async function Home() {
                       id={contact._id}
                       contactfav={contact.favorite}
                     />
-                    <Image src={tel} alt="tel" width={25} height={25} />
+                    <Image
+                      src={tel}
+                      alt="tel"
+                      width={25}
+                      height={25}
+                      className="w-6 h-6"
+                    />
 
                     <Image src={email} alt="mail" width={25} height={25} />
                   </div>
                 </div>
               </Link>
-            </>
+            </React.Fragment>
           ))}
         </>
       ) : (

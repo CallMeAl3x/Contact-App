@@ -13,13 +13,14 @@ export async function POST(req) {
   }
 }
 
-export async function GET(){
-    try{
-        const contacts = await Contact.find();
-        return NextResponse.json ({contacts}, {status:200})
-
-    }
-    catch(err){
-        return NextResponse({message: "Failed to get infos",err},{status:500})
-    }
+export async function GET() {
+  try {
+    const contacts = await Contact.find();
+    return NextResponse.json({ contacts }, { status: 200 });
+  } catch (err) {
+    return NextResponse(
+      { message: "Failed to get infos", err },
+      { status: 500 }
+    );
+  }
 }
