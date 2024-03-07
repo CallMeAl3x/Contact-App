@@ -23,13 +23,17 @@ const getContacts = async () => {
   }
 };
 
-export default async function Home() {
+export default async function Home({searchParams}) {
   const session = await getServerSession(options);
-  const { contacts } = await getContacts();
-  const reversedContacts = contacts.reverse();
-  const favoriteContacts = reversedContacts.filter(
+  const query = searchParams?.contact || '';
+  const { contacts } = await getContacts(query);
+  const favoriteContacts = contacts.filter(
     (contact) => contact.favorite
   );
+  const filtredContacts = contacts.filter((contact) => {
+    return contact.nom.toLowerCase().includes(query.toLowerCase());
+  });
+  
 
   return (
     <main className="flex flex-col h-full">
@@ -65,9 +69,9 @@ export default async function Home() {
                 <p className="text-xs text-[#9D9D9D]"> {session.user.email} </p>
                 <div className="flex gap-2">
                   <p className="text-sm text-[#9D9D9D]">
-                    {reversedContacts.length > 1
-                      ? `${reversedContacts.length} Contacts`
-                      : `${reversedContacts.length} Contact`}
+                    {filtredContacts.length > 1
+                      ? `${filtredContacts.length} Contacts`
+                      : `${filtredContacts.length} Contact`}
                   </p>
                   <span className="text-[#9D9D9D]">°</span>
                   <p className="text-sm text-vertclair1">
@@ -85,9 +89,9 @@ export default async function Home() {
         </>
       )}
 
-      {reversedContacts.length > 0 && session ? (
+      {filtredContacts.length > 0 && session ? (
         <>
-          {reversedContacts.map((contact) => (
+          {filtredContacts.map((contact) => (
             <React.Fragment key={contact._id}>
               <Link href={`/ContactPage/${contact._id}`}>
                 <div className="bg-gris1 p-3 flex justify-between mt-4 rounded-lg w-full ">

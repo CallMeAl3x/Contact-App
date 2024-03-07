@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import AddContact from "./AddContact";
 import Parameters from "./Parameters";
 
-function Top() {
+function Top({searchParams}) {
   return (
     <div className="flex gap-2">
       <div className="flex-grow-1">
