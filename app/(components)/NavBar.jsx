@@ -3,9 +3,9 @@ import SearchBar from "./SearchBar";
 import AddContact from "./AddContact";
 import Parameters from "./Parameters";
 
-function Top({searchParams}) {
+function NavBar() {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 justify-center">
       <div className="flex-grow-1">
         <SearchBar />
       </div>
@@ -17,4 +17,4 @@ function Top({searchParams}) {
   );
 }
 
-export default Top;
+export default NavBar;

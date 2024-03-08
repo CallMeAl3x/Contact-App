@@ -47,7 +47,7 @@ function SearchBar(placeholder) {
             handleSearch(e.target.value);
           }}
           className="block w-full p-2 bg-gris1 ps-10 text-sm rounded-lg dark:bg-gray-700  dark:text-white sm:w-[27rem]"
-          placeholder="Search a specific contact"
+          placeholder="Search ..."
           required
           defaultValue={searchParams.get("contact")?.toString()}
         />

@@ -16,16 +16,9 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} bg-[#000000] `}>
-        <div className="h-screen bg-[#000000] mx-6">
+        <div className="bg-[#000000] mx-4 sm:mx-6">
           <div className="mt-4">{children}</div>
           <Modal />
-          {session && (
-            <>
-              <div className="pt-1">
-                <Exit />
-              </div>
-            </>
-          )}
         </div>
       </body>
     </html>

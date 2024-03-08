@@ -57,8 +57,7 @@ async function page({ params }) {
             </Link>
 
             <Link
-              href={`/ContactPage/${contactData._id}/update/${contactData._id}`}
-            >
+              href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
               <button className="text-bleuc1">Edit</button>
             </Link>
           </div>
