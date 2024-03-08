@@ -7,7 +7,7 @@ import Modal from "./(components)/Modal";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Contact APP",
+  title: "Contact App",
   description: "Projet MMI",
 };
 
