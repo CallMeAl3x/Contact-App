@@ -1,4 +1,5 @@
 import ContactForm from '@/app/(components)/ContactForm';
+import Image from 'next/image';
 import React from 'react'
 const getContactDataById = async (id) => {
     const res = await fetch(`http://localhost:3000/api/Contacts/${id}`, {

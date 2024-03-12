@@ -10,6 +10,7 @@ const contactSchema = new Schema(
     nom: String,
     tel: String,
     email: String,
+    image:String,
   },
   {
     timestamps: true,

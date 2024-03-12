@@ -1,5 +1,6 @@
 import ContactForm from "@/app/(components)/ContactForm";
 import DeleteContact from "@/app/(components)/DeleteContact";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -64,7 +65,16 @@ async function page({ params }) {
 
           <div className="flex justify-center mt-8">
             <div className="h-32 w-32 rounded-full bg-gris1 flex justify-center items-center outlineperso2 ">
-              <p className="text-5xl">{premierelettreprenom2}</p>
+              {contactData.image ? (
+                        <>
+                        <Image src={contactData.image} width={200} height={200} alt="car" className="rounded-full w-full h-full object-cover"/>
+                        </>
+                      ): (
+                        <>
+                                      <p className="text-5xl">{premierelettreprenom2}</p>
+
+                        </>
+                      )}
             </div>
           </div>
           <p className="font-bold text-lg mt-4 text-center">

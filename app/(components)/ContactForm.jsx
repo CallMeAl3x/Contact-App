@@ -14,7 +14,48 @@ function ContactForm({ contactData }) {
     nom: contactData ? contactData.nom : "",
     tel: contactData ? contactData.tel : "",
     email: contactData ? contactData.email : "",
+    image: contactData ? contactData.image : null,
   });
+
+  const handleChange = (e) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    const name = e.target.name;
+
+    if (name === "image") {
+      const file = e.target.files[0];
+      // Vérifie s'il y a un fichier sélectionné
+      if (file) {
+        // Vérifie si le fichier sélectionné est une image
+        if (file.type && file.type.startsWith('image')) {
+          // Convertit l'image en base64
+          convertToBase64(file);
+        } else {
+          console.log("Le fichier sélectionné n'est pas une image.");
+        }
+      }
+    } else {
+      // Sinon, c'est un champ de texte normal
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+  };
+
+  const convertToBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setFormData((prevState) => ({
+        ...prevState,
+        image: reader.result,
+      }));
+    };
+    reader.onerror = (error) => {
+      console.log("error", error);
+    };
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,13 +82,6 @@ function ContactForm({ contactData }) {
     router.refresh();
   };
 
-  const handleChange = (e) => {
-    const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    const name = e.target.name;
-
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
-  };
 
   return (
     <div>
@@ -57,7 +91,12 @@ function ContactForm({ contactData }) {
             <p className="text-bleuc1">Retour</p>
           </Link>
           <p className="font-bold text-lg">
-            {contactData ? contactData.prenom : "New Contact"}
+            {contactData ?                        <div className="flex justify-center">
+              <div className="h-40 w-40">
+ <Image src={contactData.image} width={200} height={200} alt="car" className="rounded-full w-full h-full object-cover"/>
+              </div>
+            </div>
+ : "New Contact"}
           </p>
           <label htmlFor="done">
             <Image src="/green-check.svg" height={35} width={35} alt="Done" />
@@ -82,6 +121,18 @@ function ContactForm({ contactData }) {
             />
           </div>
         </div>
+
+        <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg">
+          <input
+  type="file"
+  onChange={handleChange}
+  name="image"
+  placeholder="image"
+  className="bg-gris1 border-b-2 border-vertclair1"
+/>
+
+        </div>
+       
 
         <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg">
           <input
