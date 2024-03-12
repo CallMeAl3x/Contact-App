@@ -37,23 +37,25 @@ export default async function Home({ searchParams }) {
       {session && (
         <>
           <NavBar />
-          <div className="flex mt-8 gap-2 sm:gap-6 mb-4 ">
+          <div className="flex mt-8 gap-2 sm:gap-6 mb-4 items-center ">
             <div
-              className={`w-16 h-16 rounded-full ${
+              className={`w-12 h-12 rounded-full ${
                 session?.user?.image ? "" : "bg-white"
               } outlineperso2 flex items-center justify-center`}>
               {session?.user?.image ? (
                 <img
-                  src={session.user.image}
-                  alt="User Profile"
-                  className="h-full w-full rounded-full"
-                />
+                src={session.user.image}
+                alt='User Profile'
+                height={48}
+                width={48}
+                className='rounded-full'
+              />
               ) : (
                 <>
                   <img
                     src={avatar}
-                    alt=""
-                    className="rounded-full w-full h-full"
+                    alt=''
+                    className='rounded-full w-full h-full'
                   />
                 </>
               )}
@@ -86,6 +88,10 @@ export default async function Home({ searchParams }) {
         <>
           {filtredContacts.map((contact) => (
             <React.Fragment key={contact._id}>
+                              <p className='mt-3'>
+                  {contact.nom.startsWith("a") ? "a - " : ""}
+                  {contact.nom ? contact.nom[0].toUpperCase() : "?"}
+                </p>
               <Link href={`/ContactPage/${contact._id}`}>
                 <div className="bg-gris1 p-3 flex justify-between mt-4 rounded-lg w-full ">
                   <div className="flex items-center w-[66%]">
