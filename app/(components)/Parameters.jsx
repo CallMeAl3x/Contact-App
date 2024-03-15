@@ -5,8 +5,8 @@ import points from "../Images/3points.svg";
 function Parameters() {
   return (
     <Link href="?modal=true">
-      <div className="w-[36px] h-[36px] border-2 border-gris1 rounded-full flex items-center justify-center">
-        <Image src={points} alt="parameters" className="w-[20px] h-[20px]" />
+      <div className="flex items-center justify-center">
+        <Image src={points} alt="add" width={40} height={40} />
       </div>
     </Link>
   );

@@ -4,6 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import retour from "/public/retour.svg";
+import addcontact from "../Images/addcontact.svg";
+import unknown_pic from "/public/unknown_pic.svg";
+import star_uncompleted from "/public/star_uncompleted.svg";
+import star_completed from "/public/star_completed.svg";
+import edit from "/public/edit.svg";
 
 function ContactForm({ contactData }) {
   const router = useRouter();
@@ -27,7 +33,7 @@ function ContactForm({ contactData }) {
       // Vérifie s'il y a un fichier sélectionné
       if (file) {
         // Vérifie si le fichier sélectionné est une image
-        if (file.type && file.type.startsWith('image')) {
+        if (file.type && file.type.startsWith("image")) {
           // Convertit l'image en base64
           convertToBase64(file);
         } else {
@@ -82,94 +88,270 @@ function ContactForm({ contactData }) {
     router.refresh();
   };
 
+  const [star, setStar] = useState(false);
 
   return (
     <div>
       <form className="flex flex-col gap-3 sm:mt-12" onSubmit={handleSubmit}>
         <div className="flex justify-between mt-4 items-center">
           <Link href={"../"}>
-            <p className="text-bleuc1">Retour</p>
+            <Image src={retour} alt="retour" height={38} width={38} />
           </Link>
-          <p className="font-bold text-lg">
-            {contactData ?                        <div className="flex justify-center">
-              <div className="h-40 w-40">
- <Image src={contactData.image} width={200} height={200} alt="car" className="rounded-full w-full h-full object-cover"/>
-              </div>
-            </div>
- : "New Contact"}
-          </p>
-          <label htmlFor="done">
-            <Image src="/green-check.svg" height={35} width={35} alt="Done" />
-          </label>
+          {contactData ? (
+            <label htmlFor="done">
+              <Image src={edit} height={42} width={42} alt="add contact" />
+            </label>
+          ) : (
+            <label htmlFor="done">
+              <Image
+                src={addcontact}
+                height={42}
+                width={42}
+                alt="add contact"
+              />
+            </label>
+          )}
           <input type="submit" id="done" className="sr-only" value={"Done"} />
         </div>
 
-        <div className="flex flex-col">
-          <h3 className="font-bold text-2xl text-center sm:text-left mt-4 mb-4">
-            {contactData
-              ? `Update ${contactData.prenom}`
-              : "Create your Contact"}
-          </h3>
-          <div className="flex gap-2 items-center mt-4 mb-4">
-            <p className="text-xs text-bleuc1">Favorite</p>
-            <input
-              type="checkbox"
-              className="text-xs text-bleuc1"
-              name="favorite"
-              onChange={handleChange}
-              checked={formData.favorite}
-            />
+        <div className="flex flex-col items-center">
+          <div className="relative">
+            <label htmlFor="file" className="relative cursor-pointer">
+              {contactData && contactData.image ? (
+                <Image
+                  src={contactData.image}
+                  height="142"
+                  width="142"
+                  alt="Profile picture"
+                  className="rounded-full border-gray border-[2.5px]"
+                />
+              ) : contactData && contactData.prenom ? (
+                <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-[142px] w-[142px] flex justify-center items-center">
+                  <p className="font-Jost font-bold text-[52px]">
+                    {contactData.prenom[0].toUpperCase()}
+                  </p>
+                </div>
+              ) : (
+                <Image
+                  src={unknown_pic}
+                  height="142"
+                  width="142"
+                  alt="Profile picture"
+                  className="rounded-full"
+                />
+              )}
+              <input
+                type="file"
+                id="file"
+                onChange={handleChange}
+                name="image"
+                className="sr-only"
+              />
+            </label>
+
+            <label
+              htmlFor="favorite"
+              className="absolute -top-[0%] right-0 cursor-pointer">
+              {star ? (
+                <Image
+                  src={star_completed}
+                  height="42"
+                  width="42"
+                  alt="Add to favorite"
+                  onClick={() => setStar(!star)}
+                />
+              ) : (
+                <Image
+                  src={star_uncompleted}
+                  height="42"
+                  width="42"
+                  alt="Add to favorite"
+                  onClick={() => setStar(!star)}
+                />
+              )}
+              <input
+                id="favorite"
+                type="checkbox"
+                className="sr-only z-10"
+                name="favorite"
+                onChange={handleChange}
+                checked={formData.favorite}
+              />
+            </label>
           </div>
+
+          {!contactData && (
+            <label
+              htmlFor="file"
+              className="cursor-pointer mt-4 rounded-[16px] border-ring border-[1.5px] py-1 px-4">
+              <input
+                type="file"
+                id="file"
+                onChange={handleChange}
+                name="image"
+                className="sr-only"
+              />
+              Ajouter une photo
+            </label>
+          )}
         </div>
 
-        <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg">
-          <input
-  type="file"
-  onChange={handleChange}
-  name="image"
-  placeholder="image"
-  className="bg-gris1 border-b-2 border-vertclair1"
-/>
+        <div className="flex flex-col items-center justify-center gap-8 mt-9">
+          {!contactData ? (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  id="nom"
+                  name="nom"
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="Nom de famille"
+                />
+                <label
+                  for="nom"
+                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
+                  Nom de famille
+                </label>
+              </div>
+            </div>
+          ) : (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  id="nom"
+                  name="nom"
+                  value={formData.nom}
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="Nom de famille"
+                />
+                <label
+                  for="nom"
+                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  Nom de famille
+                </label>
+              </div>
+            </div>
+          )}
 
-        </div>
-       
+          {!contactData ? (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  id="prenom"
+                  name="prenom"
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="Prénom"
+                />
+                <label
+                  for="prenom"
+                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit  text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
+                  Prénom
+                </label>
+              </div>
+            </div>
+          ) : (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  id="prenom"
+                  name="prenom"
+                  value={formData.prenom}
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="Prénom"
+                />
+                <label
+                  for="prenom"
+                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  Prénom
+                </label>
+              </div>
+            </div>
+          )}
 
-        <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg">
-          <input
-            type="text"
-            onChange={handleChange}
-            name="prenom"
-            placeholder="Name"
-            className="bg-gris1 border-b-2 border-vertclair1"
-            value={formData.prenom}
-          />
-          <input
-            type="text"
-            onChange={handleChange}
-            name="nom"
-            placeholder="Surname"
-            className="bg-gris1 border-b-2 border-vertclair1"
-            value={formData.nom}
-          />
-        </div>
+          {!contactData ? (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="tel"
+                  onChange={handleChange}
+                  id="tel"
+                  name="tel"
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="Numéro de téléphone"
+                />
+                <label
+                  for="tel"
+                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
+                  Numéro de téléphone
+                </label>
+              </div>
+            </div>
+          ) : (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="tel"
+                  onChange={handleChange}
+                  id="tel"
+                  name="tel"
+                  value={formData.tel}
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="Numéro de téléphone"
+                />
+                <label
+                  for="tel"
+                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  Numéro de téléphone
+                </label>
+              </div>
+            </div>
+          )}
 
-        <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg">
-          <input
-            type="tel"
-            onChange={handleChange}
-            name="tel"
-            placeholder="Telephone"
-            className="bg-gris1 border-b-2 border-vertclair1"
-            value={formData.tel}
-          />
-          <input
-            type="email"
-            onChange={handleChange}
-            name="email"
-            placeholder="Email"
-            className="bg-gris1 border-b-2 border-vertclair1"
-            value={formData.email}
-          />
+          {!contactData ? (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="email"
+                  onChange={handleChange}
+                  id="email"
+                  name="email"
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="E-mail"
+                />
+                <label
+                  for="email"
+                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
+                  E-mail
+                </label>
+              </div>
+            </div>
+          ) : (
+            <div class="bg-background rounded-lg">
+              <div class="relative bg-inherit">
+                <input
+                  type="email"
+                  onChange={handleChange}
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  placeholder="E-mail"
+                />
+                <label
+                  for="email"
+                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  E-mail
+                </label>
+              </div>
+            </div>
+          )}
         </div>
       </form>
     </div>

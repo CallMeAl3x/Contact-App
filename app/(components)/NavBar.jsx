@@ -5,11 +5,11 @@ import Parameters from "./Parameters";
 
 function NavBar() {
   return (
-    <div className="flex gap-2 justify-center">
-      <div className="flex-grow-1">
+    <div className="flex gap-2 justify-center mt-7 navbar">
+      <div className="">
         <SearchBar />
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-3 items-center">
         <AddContact />
         <Parameters />
       </div>

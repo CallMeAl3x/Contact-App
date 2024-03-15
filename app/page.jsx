@@ -2,7 +2,7 @@
 import Image from "next/image";
 import avatar from "/public/avatar.svg";
 import chevron from "./Images/chevron.svg";
-import box from "./Images/dropbox-logo-svgrepo-com.svg";
+import box from "./Images/nocontacts.svg";
 import email from "/public/mail.svg";
 import tel from "/public/tel.svg";
 import Link from "next/link";
@@ -25,11 +25,24 @@ const getContacts = async () => {
 
 export default async function Home({ searchParams }) {
   const session = await getServerSession(options);
-  const query = searchParams?.contact || "" ;
+  const query = searchParams?.contact || "";
   const { contacts } = await getContacts(query);
   const favoriteContacts = contacts.filter((contact) => contact.favorite);
   const filtredContacts = contacts.filter((contact) => {
     return contact.nom.toLowerCase().includes(query.toLowerCase());
+  });
+  const sortedContacts = filtredContacts.sort((a, b) =>
+    a.prenom.localeCompare(b.prenom, "fr", { sensitivity: "base" })
+  );
+
+  const contactsToShow = sortedContacts.map((contact, index, array) => {
+    const currentInitial = contact.prenom[0].toUpperCase();
+    const showInitial =
+      index === 0 ||
+      currentInitial !== array[index - 1].prenom[0].toUpperCase(); // vrai si c'est le premier contact ou si l'initiale change
+    const sameAsPrevious =
+      index > 0 && currentInitial === array[index - 1].prenom[0].toUpperCase(); // vrai si l'initiale est la même que celle du contact précédent
+    return { ...contact, showInitial, sameAsPrevious }; // Retourner le contact avec les nouvelles propriétés
   });
 
   return (
@@ -37,43 +50,48 @@ export default async function Home({ searchParams }) {
       {session && (
         <>
           <NavBar />
-          <div className="flex mt-8 gap-2 sm:gap-6 mb-4 items-center ">
+          <div className="flex mt-8 gap-2 sm:gap-6 mb-4 items-center">
             <div
-              className={`w-12 h-12 rounded-full ${
+              className={`w-[50px] h-[50px] rounded-full ${
                 session?.user?.image ? "" : "bg-white"
               } outlineperso2 flex items-center justify-center`}>
               {session?.user?.image ? (
                 <img
-                src={session.user.image}
-                alt='User Profile'
-                height={48}
-                width={48}
-                className='rounded-full'
-              />
+                  src={session.user.image}
+                  alt="User Profile"
+                  height={50}
+                  width={50}
+                  className="rounded-full"
+                />
               ) : (
                 <>
                   <img
                     src={avatar}
-                    alt=''
-                    className='rounded-full w-full h-full'
+                    alt=""
+                    className="rounded-full w-full h-full"
                   />
                 </>
               )}
             </div>
-            <div className="my-auto ml-2">
-              <h2 className="truncate w-fit">{session?.user?.name} (Me)</h2>
-              <p className="text-xs text-[#9D9D9D]"> {session.user.email} </p>
-              <div className="flex gap-2">
-                <p className="text-sm text-[#9D9D9D]">
+            <div className="my-auto ml-2 flex flex-col gap-1">
+              <h2 className="truncate w-fit font-Jost font-bold text-base">
+                {session?.user?.name} (Me)
+              </h2>
+              <p className="text-[15px] text-gray font-Jost font-semibold">
+                {" "}
+                {session.user.email}{" "}
+              </p>
+              <div className="flex gap-2 text-xs">
+                <p className="">
                   {filtredContacts.length > 1
                     ? `${filtredContacts.length} Contacts`
                     : `${filtredContacts.length} Contact`}
                 </p>
-                <span className="text-[#9D9D9D]">°</span>
-                <p className="text-sm text-vertclair1">
+                <span className="mt-0.5">°</span>
+                <p className="text-green font-medium">
                   {favoriteContacts.length > 1
                     ? `${favoriteContacts.length} Favoris`
-                    : `${favoriteContacts.length} Favori`}
+                    : `${favoriteContacts.length} Favoris`}
                 </p>
               </div>
             </div>
@@ -84,51 +102,67 @@ export default async function Home({ searchParams }) {
         </>
       )}
 
-      {filtredContacts.length > 0 && session ? (
+      {contactsToShow.length > 0 && session ? (
         <>
-          {filtredContacts.map((contact) => (
+          {contactsToShow.map((contact, index) => (
             <React.Fragment key={contact._id}>
-                              <p className='mt-3'>
-                  {contact.nom.startsWith("a") ? "a - " : ""}
-                  {contact.nom ? contact.nom[0].toUpperCase() : "?"}
-                </p>
-              <Link href={`/ContactPage/${contact._id}`}>
-                <div className="bg-gris1 p-3 flex justify-between mt-4 rounded-lg w-full ">
-                  <div className="flex items-center w-[66%]">
-                    <div className="h-8 w-8  outlineperso2 rounded-full flex justify-center items-center">
-                      
-                      {contact.image ? (
-                        <>
-                        <Image src={contact.image} width={200} height={200} alt="car" className="rounded-full w-full h-full object-cover"/>
-                        </>
-                      ): (
-                        <>
-                        <p className="">
-                        {contact.prenom ? contact.prenom[0].toUpperCase() : "?"}
-                      </p>
-                        </>
-                      )}
-                    </div>
-                    <div className="ml-4 truncate w-[50%] flex">
-                      <p>
-                        {contact.prenom} {contact.nom}
-                      </p>
-                    </div>
+              {!contact.sameAsPrevious && (
+                <>
+                  {index > 0 && <div className="mt-6"></div>}{" "}
+                  {/* Espace entre les groupes */}
+                  <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-9 w-9 flex justify-center items-center">
+                    <p className="font-Jost font-bold text-[16px]">
+                      {contact.prenom ? contact.prenom[0].toUpperCase() : "?"}
+                    </p>
                   </div>
-                  <div className="flex items-center gap-2 ml-auto mr-3">
-                    <ContactFav
-                      id={contact._id}
-                      contactfav={contact.favorite}
+                </>
+              )}
+              <Link href={`/ContactPage/${contact._id}`}>
+                <div
+                  className={`flex items-center ${
+                    contact.sameAsPrevious
+                      ? "-mt-[1.15px] rounded-t-none before:content-[''] before:absolute before:h-[1px] before:w-[95%] before:bg-gray before:top-0 before:right-0"
+                      : "mt-4 rounded-m"
+                  } shadow-sm w-[95%] bg-[#303034] rounded-md p-3 relative`}>
+                  <div className="h-10 w-10 flex-shrink-0 bg-gray-300 rounded-full overflow-hidden flex justify-center items-center mr-4">
+                    {contact.image ? (
+                      <Image
+                        src={contact.image}
+                        width={40}
+                        height={40}
+                        alt={contact.prenom}
+                        className="rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="bg-[#1C1C1E] rounded-full border border-ring h-[40px] w-[40px] flex justify-center items-center">
+                        <p className="font-Jost font-bold text-[16px]">
+                          {contact.prenom
+                            ? contact.prenom[0].toUpperCase()
+                            : "?"}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="truncate flex-grow">
+                    <p className="text-white font-bold truncate">
+                      {contact.prenom} {contact.nom}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 ml-4">
+                    <Image
+                      src={email}
+                      alt="mail"
+                      width={35}
+                      height={35}
+                      className="flex-shrink-0"
                     />
                     <Image
                       src={tel}
                       alt="tel"
-                      width={25}
-                      height={25}
-                      className="w-6 h-6"
+                      width={35}
+                      height={35}
+                      className="flex-shrink-0"
                     />
-
-                    <Image src={email} alt="mail" width={25} height={25} />
                   </div>
                 </div>
               </Link>
@@ -139,13 +173,10 @@ export default async function Home({ searchParams }) {
         <>
           {session ? (
             <>
-              <div className="w-full h-[50vh] flex justify-center items-center">
+              <div className="ml-auto mr-auto mt-32">
                 <Link href={"/ContactPage/new"}>
-                  <div className="w-48 h-48 rounded-full bg-white border border-x-emerald-500 flex flex-col justify-center items-center outlineperso1">
-                    <Image src={box} alt="box" width={96} />
-                    <p className="text-vertclair1 font-bold text-base">
-                      No contact yet
-                    </p>
+                  <div className="">
+                    <Image src={box} alt="box" width={170} height={170} />
                   </div>
                 </Link>
               </div>

@@ -1,8 +1,16 @@
 import ContactForm from "@/app/(components)/ContactForm";
 import DeleteContact from "@/app/(components)/DeleteContact";
+import email from "/public/mail.svg";
+import tel from "/public/tel.svg";
+import retour from "/public/retour.svg";
+import message from "/public/message.svg";
+import edit from "/public/edit.svg";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import unknown_pic from "/public/unknown_pic.svg";
+import star_uncompleted from "/public/star_uncompleted.svg";
+import star_completed from "/public/star_completed.svg";
 
 const getContactDataById = async (id) => {
   const res = await fetch(`http://localhost:3000/api/Contacts/${id}`, {
@@ -51,60 +59,91 @@ async function page({ params }) {
       );
     } else {
       return (
-        <>
-          <div className="flex justify-between items-center">
-            <Link href={"../"}>
-              <p className="text-bleuc1">Cancel</p>
-            </Link>
+        <div className="flex flex-col min-h-screen">
+          <div className="flex-grow">
+            <div className="flex justify-between items-center mt-4">
+              <Link href={"../"}>
+                <Image src={retour} alt="retour" height={38} width={38} />
+              </Link>
 
-            <Link
-              href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
-              <button className="text-bleuc1">Edit</button>
-            </Link>
-          </div>
+              <Link
+                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
+                <Image src={edit} height={42} width={42} alt="edit" />
+              </Link>
+            </div>
 
-          <div className="flex justify-center mt-8">
-            <div className="h-32 w-32 rounded-full bg-gris1 flex justify-center items-center outlineperso2 ">
+            <div className="relative w-fit ml-auto mr-auto mt-12">
               {contactData.image ? (
-                        <>
-                        <Image src={contactData.image} width={200} height={200} alt="car" className="rounded-full w-full h-full object-cover"/>
-                        </>
-                      ): (
-                        <>
-                                      <p className="text-5xl">{premierelettreprenom2}</p>
+                <>
+                  <Image
+                    src={contactData.image || unknown_pic}
+                    height="142"
+                    width="142"
+                    alt="Profile picture"
+                    className="rounded-full border-gray border-[2.5px]"
+                  />
+                </>
+              ) : (
+                <>
+                  <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-[142px] w-[142px] flex justify-center items-center">
+                    <p className="font-Jost font-bold text-[52px]">
+                      {premierelettreprenom2}
+                    </p>
+                  </div>
+                </>
+              )}
 
-                        </>
-                      )}
+              <label
+                htmlFor="favorite"
+                className="absolute -top-[6%] right-0 cursor-pointer">
+                {contactData.favorite ? (
+                  <Image
+                    src={star_completed}
+                    height="42"
+                    width="42"
+                    alt="Add to favorite"
+                  />
+                ) : (
+                  <Image
+                    src={star_uncompleted}
+                    height="42"
+                    width="42"
+                    alt="Add to favorite"
+                  />
+                )}
+              </label>
+            </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <p className="font-bold mt-4 text-center text-xl">
+                {contactData.prenom} {contactData.nom}
+              </p>
+
+              <p className="font-regular">{contactData.tel}</p>
+
+              <p className="font-semibold text-gray text-base">
+                {contactData.email}
+              </p>
+            </div>
+
+            <div className="flex gap-6 ml-auto mr-auto mt-6 w-fit">
+              <Image src={tel} alt="tel" width={50} height={50} />
+              <Image src={message} alt="message" width={50} height={50} />
+              <Image src={email} alt="mail" width={50} height={50} />
+            </div>
+
+            <div class="bg-background rounded-lg">
+              <div class="peer bg-transparent pb-3 rounded-lg ring-ring w-64">
+                <div className="ml-1">
+                  <h5 className="font-bold pt-2">Adresse</h5>
+                  <p className="pt-2">28B Rue des fontaines</p>
+                </div>
+              </div>
             </div>
           </div>
-          <p className="font-bold text-lg mt-4 text-center">
-            {contactData.prenom}
-          </p>
 
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col justify-center gap-4 p-4 bg-gris1 rounded-lg mt-8">
-              <div className="border-b-2 border-vertclair1">
-                <p>{contactData.prenom}</p>
-              </div>
-              <div className="border-b-2 border-vertclair1">
-                <p>{contactData.nom}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-center gap-3 p-4 bg-gris1 rounded-lg">
-              <div className="border-b-2 border-vertclair1">
-                <p>{contactData.tel}</p>
-              </div>
-              <div className="border-b-2 border-vertclair1">
-                <p className="truncate">{contactData.email}</p>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
-              <DeleteContact id={contactData._id} />
-            </div>
-          </div>
-        </>
+          <DeleteContact id={contactData._id} />
+        </div>
       );
     }
   };
