@@ -15,6 +15,7 @@ export const options = {
 
         return {
           ...profile,
+          id: profile.id,
           role: userRole,
           image: profile.avatar_url,
           phone: profile.phone, // Ajouter le numéro de téléphone depuis le profil GitHub si disponible
@@ -86,6 +87,7 @@ export const options = {
       if (user) {
         token.role = user.role;
         token.phone = user.phone; // Ajoute le numéro de téléphone au jeton
+        token.id = user.id; // Ajoute l'ID de l'utilisateur au jeton
       }
       return token;
     },
@@ -93,9 +95,11 @@ export const options = {
       if (session && token && token.role) {
         session.user.role = token.role;
         session.user.phone = token.phone;
+        session.user.id = token.id; // Ajoute l'ID de l'utilisateur à la session
         // Ajoute le numéro de téléphone à la session utilisateur
       }
       return session;
     },
   },
+  
 };

@@ -10,9 +10,12 @@ import unknown_pic from "/public/unknown_pic.svg";
 import star_uncompleted from "/public/star_uncompleted.svg";
 import star_completed from "/public/star_completed.svg";
 import edit from "/public/edit.svg";
+import { useSession } from "next-auth/react";
 
 function ContactForm({ contactData }) {
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const [formData, setFormData] = useState({
     favorite: contactData ? contactData.favorite : false,
@@ -21,6 +24,7 @@ function ContactForm({ contactData }) {
     tel: contactData ? contactData.tel : "",
     email: contactData ? contactData.email : "",
     image: contactData ? contactData.image : null,
+    createurID: session?.user?.id || "",
   });
 
   const handleChange = (e) => {
@@ -47,6 +51,7 @@ function ContactForm({ contactData }) {
         [name]: value,
       }));
     }
+    console.log("formData before fetch:", formData); // Ajouter ce console.log
   };
 
   const convertToBase64 = (file) => {
@@ -151,7 +156,8 @@ function ContactForm({ contactData }) {
 
             <label
               htmlFor="favorite"
-              className="absolute -top-[0%] right-0 cursor-pointer">
+              className="absolute -top-[0%] right-0 cursor-pointer"
+            >
               {star ? (
                 <Image
                   src={star_completed}
@@ -183,7 +189,8 @@ function ContactForm({ contactData }) {
           {!contactData && (
             <label
               htmlFor="file"
-              className="cursor-pointer mt-4 rounded-[16px] border-ring border-[1.5px] py-1 px-4">
+              className="cursor-pointer mt-4 rounded-[16px] border-ring border-[1.5px] py-1 px-4"
+            >
               <input
                 type="file"
                 id="file"
@@ -198,38 +205,40 @@ function ContactForm({ contactData }) {
 
         <div className="flex flex-col items-center justify-center gap-8 mt-9">
           {!contactData ? (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="text"
                   onChange={handleChange}
                   id="nom"
                   name="nom"
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Nom de famille"
                 />
                 <label
-                  for="nom"
-                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
+                  htmlFor="nom"
+                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all"
+                >
                   Nom de famille
                 </label>
               </div>
             </div>
           ) : (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="text"
                   onChange={handleChange}
                   id="nom"
                   name="nom"
                   value={formData.nom}
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Nom de famille"
                 />
                 <label
-                  for="nom"
-                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  htmlFor="nom"
+                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
+                >
                   Nom de famille
                 </label>
               </div>
@@ -237,38 +246,40 @@ function ContactForm({ contactData }) {
           )}
 
           {!contactData ? (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="text"
                   onChange={handleChange}
                   id="prenom"
                   name="prenom"
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Prénom"
                 />
                 <label
-                  for="prenom"
-                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit  text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
+                  htmlFor="prenom"
+                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit  text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all"
+                >
                   Prénom
                 </label>
               </div>
             </div>
           ) : (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="text"
                   onChange={handleChange}
                   id="prenom"
                   name="prenom"
                   value={formData.prenom}
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Prénom"
                 />
                 <label
-                  for="prenom"
-                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  htmlFor="prenom"
+                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
+                >
                   Prénom
                 </label>
               </div>
@@ -276,38 +287,40 @@ function ContactForm({ contactData }) {
           )}
 
           {!contactData ? (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="tel"
                   onChange={handleChange}
                   id="tel"
                   name="tel"
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Numéro de téléphone"
                 />
                 <label
-                  for="tel"
-                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
+                  htmlFor="tel"
+                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all"
+                >
                   Numéro de téléphone
                 </label>
               </div>
             </div>
           ) : (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="tel"
                   onChange={handleChange}
                   id="tel"
                   name="tel"
                   value={formData.tel}
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Numéro de téléphone"
                 />
                 <label
-                  for="tel"
-                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  htmlFor="tel"
+                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
+                >
                   Numéro de téléphone
                 </label>
               </div>
@@ -315,38 +328,40 @@ function ContactForm({ contactData }) {
           )}
 
           {!contactData ? (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="email"
                   onChange={handleChange}
                   id="email"
                   name="email"
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="E-mail"
                 />
                 <label
-                  for="email"
-                  class="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
+                  htmlFor="email"
+                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all"
+                >
                   E-mail
                 </label>
               </div>
             </div>
           ) : (
-            <div class="bg-background rounded-lg">
-              <div class="relative bg-inherit">
+            <div className="bg-background rounded-lg">
+              <div className="relative bg-inherit">
                 <input
                   type="email"
                   onChange={handleChange}
                   id="email"
                   name="email"
                   value={formData.email}
-                  class="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="E-mail"
                 />
                 <label
-                  for="email"
-                  class="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm">
+                  htmlFor="email"
+                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
+                >
                   E-mail
                 </label>
               </div>

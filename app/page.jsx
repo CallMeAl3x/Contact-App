@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import avatar from "/public/avatar.svg";
 import chevron from "./Images/chevron.svg";
@@ -7,10 +6,10 @@ import email from "/public/mail.svg";
 import tel from "/public/tel.svg";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import ContactFav from "./(components)/ContactFav";
 import { options } from "./api/auth/[...nextauth]/options";
 import React from "react";
 import NavBar from "./(components)/NavBar";
+import SignInPage from "./(components)/SignInPage";
 
 const getContacts = async () => {
   try {
@@ -25,8 +24,10 @@ const getContacts = async () => {
 
 export default async function Home({ searchParams }) {
   const session = await getServerSession(options);
+  console.log("User ID:", session?.user?.id); // Afficher l'ID de l'utilisateur s'il est connecté
   const query = searchParams?.contact || "";
   const { contacts } = await getContacts(query);
+  
   const favoriteContacts = contacts.filter((contact) => contact.favorite);
   const filtredContacts = contacts.filter((contact) => {
     return contact.nom.toLowerCase().includes(query.toLowerCase());
@@ -35,7 +36,13 @@ export default async function Home({ searchParams }) {
     a.prenom.localeCompare(b.prenom, "fr", { sensitivity: "base" })
   );
 
-  const contactsToShow = sortedContacts.map((contact, index, array) => {
+  const filterToOneContact = sortedContacts.filter((contact) =>
+    {
+      return contact.createurID === session?.user?.id ;
+    }
+  );
+
+  const contactsToShow = filterToOneContact.map((contact, index, array) => {
     const currentInitial = contact.prenom[0].toUpperCase();
     const showInitial =
       index === 0 ||
@@ -191,6 +198,7 @@ export default async function Home({ searchParams }) {
                     Login
                   </Link>
                 </div>
+                
               </div>
             </>
           )}
