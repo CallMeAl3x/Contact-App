@@ -11,6 +11,11 @@ import React from "react";
 import unknown_pic from "/public/unknown_pic.svg";
 import star_uncompleted from "/public/star_uncompleted.svg";
 import star_completed from "/public/star_completed.svg";
+import { getServerSession } from "next-auth";
+import {options} from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
+
+
 
 const getContactDataById = async (id) => {
   const res = await fetch(`http://localhost:3000/api/Contacts/${id}`, {
@@ -25,6 +30,12 @@ const getContactDataById = async (id) => {
 };
 
 async function page({ params }) {
+  const session = await getServerSession(options);
+  if (!session){
+    redirect("/");
+  }
+
+
   const addContact = params.id === "new";
   const editMode = params.id === "update";
 
@@ -59,6 +70,7 @@ async function page({ params }) {
       );
     } else {
       return (
+        
         <div className="flex flex-col min-h-screen">
           <div className="flex-grow">
             <div className="flex justify-between items-center mt-4">

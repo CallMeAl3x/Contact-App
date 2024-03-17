@@ -11,8 +11,11 @@ import star_uncompleted from "/public/star_uncompleted.svg";
 import star_completed from "/public/star_completed.svg";
 import edit from "/public/edit.svg";
 import { useSession } from "next-auth/react";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 
 function ContactForm({ contactData }) {
+  const { toast } = useToast();
   const router = useRouter();
 
   const { data: session } = useSession();
@@ -28,6 +31,8 @@ function ContactForm({ contactData }) {
   });
 
   const handleChange = (e) => {
+    // Créer une référence pour votre image
+
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
     const name = e.target.name;
@@ -66,6 +71,21 @@ function ContactForm({ contactData }) {
     reader.onerror = (error) => {
       console.log("error", error);
     };
+    toast({
+      variant: "primary",
+      title: (
+        <h3 className="text-white font-bold">
+          Connectez-vous pour accéder à ce service.
+        </h3>
+      ),
+      action: (
+        <ToastAction altText="Goto schedule to undo">
+          <Link href={"/api/auth/signin"}>
+            <p className="text-white">Me connecter</p>
+          </Link>
+        </ToastAction>
+      ),
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -120,70 +140,87 @@ function ContactForm({ contactData }) {
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="relative">
-            <label htmlFor="file" className="relative cursor-pointer">
-              {contactData && contactData.image ? (
-                <Image
-                  src={contactData.image}
-                  height="142"
-                  width="142"
-                  alt="Profile picture"
-                  className="rounded-full border-gray border-[2.5px]"
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <label htmlFor="file" className="relative cursor-pointer">
+                {contactData && contactData.image ? (
+                  <Image
+                    src={contactData.image}
+                    height="142"
+                    width="142"
+                    alt="Profile picture"
+                    className="rounded-full border-gray border-[2.5px]"
+                  />
+                ) : contactData && contactData.prenom ? (
+                  <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-[142px] w-[142px] flex justify-center items-center">
+                    <p className="font-Jost font-bold text-[52px]">
+                      {contactData.prenom[0].toUpperCase()}
+                    </p>
+                  </div>
+                ) : formData.image ? (
+                  <>
+                    <div className="flex flex-col items-center justify-center preview">
+                      <Image
+                        src={formData.image}
+                        width="142"
+                        height="142"
+                        alt="Preview"
+                        className="rounded-full object-cover border-gray border-[2.5px] w-32 h-32"
+                      />
+                      <p className="preview2">Preview</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      src={unknown_pic}
+                      width="142"
+                      height="142"
+                      alt="Preview"
+                      className="rounded-full object-cover border-gray border-[2.5px] w-32 h-32"
+                    />
+                  </>
+                )}
+                <input
+                  type="file"
+                  id="file"
+                  onChange={handleChange}
+                  name="image"
+                  className="sr-only"
                 />
-              ) : contactData && contactData.prenom ? (
-                <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-[142px] w-[142px] flex justify-center items-center">
-                  <p className="font-Jost font-bold text-[52px]">
-                    {contactData.prenom[0].toUpperCase()}
-                  </p>
-                </div>
-              ) : (
-                <Image
-                  src={unknown_pic}
-                  height="142"
-                  width="142"
-                  alt="Profile picture"
-                  className="rounded-full"
-                />
-              )}
-              <input
-                type="file"
-                id="file"
-                onChange={handleChange}
-                name="image"
-                className="sr-only"
-              />
-            </label>
+              </label>
 
-            <label
-              htmlFor="favorite"
-              className="absolute -top-[0%] right-0 cursor-pointer"
-            >
-              {star ? (
-                <Image
-                  src={star_completed}
-                  height="42"
-                  width="42"
-                  alt="Add to favorite"
-                  onClick={() => setStar(!star)}
+              <label
+                htmlFor="favorite"
+                className="absolute -top-[0%] right-0 cursor-pointer"
+              >
+                {star ? (
+                  <Image
+                    src={star_completed}
+                    height="42"
+                    width="42"
+                    alt="Add to favorite"
+                    onClick={() => setStar(!star)}
+                  />
+                ) : (
+                  <Image
+                    src={star_uncompleted}
+                    height="42"
+                    width="42"
+                    alt="Add to favorite"
+                    onClick={() => setStar(!star)}
+                  />
+                )}
+                <input
+                  id="favorite"
+                  type="checkbox"
+                  className="sr-only z-10"
+                  name="favorite"
+                  onChange={handleChange}
+                  checked={formData.favorite}
                 />
-              ) : (
-                <Image
-                  src={star_uncompleted}
-                  height="42"
-                  width="42"
-                  alt="Add to favorite"
-                  onClick={() => setStar(!star)}
-                />
-              )}
-              <input
-                id="favorite"
-                type="checkbox"
-                className="sr-only z-10"
-                name="favorite"
-                onChange={handleChange}
-                checked={formData.favorite}
-              />
-            </label>
+              </label>
+            </div>
           </div>
 
           {!contactData && (

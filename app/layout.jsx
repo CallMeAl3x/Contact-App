@@ -5,6 +5,7 @@ import { options } from "./api/auth/[...nextauth]/options";
 import Modal from "./(components)/Modal";
 import AuthProvider from "./(components)/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "Contact App",
@@ -17,9 +18,10 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.className}`}>
         <AuthProvider>
-        <div className="mx-5">{children}</div>
-        <Modal />
+          <div className="mx-5">{children}</div>
+          <Modal />
         </AuthProvider>
+        <Toaster />
       </body>
     </html>
   );
