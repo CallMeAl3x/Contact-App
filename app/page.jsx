@@ -46,7 +46,7 @@ export default async function Home({ searchParams }) {
   );
 
   const filterToOneContact = sortedContacts.filter((contact) => {
-    return contact.createurID === session?.user?.id;
+    return contact.createurID == session?.user?.id;
   });
 
   
