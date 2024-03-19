@@ -49,8 +49,6 @@ export default async function Home({ searchParams }) {
     return contact.createurID == session?.user?.id;
   });
 
-  
-
   const contactsToShow = filterToOneContact.map((contact, index, array) => {
     const currentInitial = contact.prenom[0].toUpperCase();
     const showInitial =
@@ -198,7 +196,7 @@ export default async function Home({ searchParams }) {
                 </div>
               </>
             )}
-            { !contactsToShow.length > 0 && (
+            {!contactsToShow.length > 0 && (
               <>
                 <Link className="" href={"/ContactPage/new"}>
                   <Image src={box} alt="box" width={170} height={170} />
