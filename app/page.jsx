@@ -212,12 +212,14 @@ export default async function Home({ searchParams }) {
               {session ? (
                 <>
                   <p className="text-white font-bold">Déconnectez-vous</p>
+                  <p className="text-white"> session : {session?.user?.id} </p>
                 </>
               ) : (
                 <>
                   <p className="text-white font-bold">
                     Connectez-vous avec :
                   </p>
+                  
                 </>
               )}
             </SheetTitle>

@@ -58,21 +58,15 @@ export const options = {
       },
       async authorize(credentials) {
         try {
-          const foundUser = await User.findOne({ email: credentials.email })
-            .lean()
-            .exec();
+          const foundUser = await User.findOne({ email: credentials.email }).lean().exec();
       
           if (foundUser) {
-            const match = await bcrypt.compare(
-              credentials.password,
-              foundUser.password
-            );
+            const match = await bcrypt.compare(credentials.password, foundUser.password);
       
             if (match) {
-              delete foundUser.password
-      
+              delete foundUser.password;
               foundUser["role"] = "Unverified Email";
-              return foundUser
+              return foundUser;
             }
           }
         } catch (err) {
@@ -87,7 +81,7 @@ export const options = {
       if (user) {
         token.role = user.role;
         token.phone = user.phone; // Ajoute le numéro de téléphone au jeton
-        token.id = user.id; // Ajoute l'ID de l'utilisateur au jeton
+        token.id = user._id.toString(); // Ajoute l'ID de l'utilisateur au jeton
       }
       return token;
     },
@@ -101,5 +95,4 @@ export const options = {
       return session;
     },
   },
-  
 };
