@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Exit from "./Exit";
-import UserForm from "./UserForm";
 import Link from "next/link";
 import CredentialForm from "./CredentialForm";
 function SignInPage({ session }) {
@@ -23,7 +22,7 @@ function SignInPage({ session }) {
           <>
             <button
               onClick={() => signIn("github")}
-              className="border-2 border-white rounded-lg p-4"
+              className="border-2 border-white rounded-lg p-4 duration-300 ease-in-out hover:bg-gray-800"
             >
               <div className="flex items-center justify-center gap-4">
                 <p className="text-xl text-white">Github</p>
@@ -40,7 +39,7 @@ function SignInPage({ session }) {
 
             <button
               onClick={() => signIn("google")}
-              className="border-2 border-white rounded-lg p-4"
+              className="border-2 border-white rounded-lg p-4 duration-300 ease-in-out hover:bg-gray-800"
             >
               <div className="flex items-center justify-center gap-4">
                 <p className="text-xl text-white">Google</p>
@@ -58,7 +57,9 @@ function SignInPage({ session }) {
 
             <button
               onClick={handleSignUp}
-              className="border-2 border-[#25723B] rounded-lg p-4"
+              className={`border-2 border-[#25723B] rounded-lg p-4 ${
+                signUp ? "bg-[#25723B] text-white" : ""
+              } duration-300 ease-in-out hover:bg-green-800`}
             >
               <div className="flex items-center justify-center gap-4">
                 <p className="text-xl text-white">Nous</p>
@@ -74,17 +75,13 @@ function SignInPage({ session }) {
             </button>
             <Link
               href={"/Account"}
-              className="text-right text-white font-bold "
+              className="text-right text-white font-bold underline "
             >
               M&apos;inscrire
             </Link>
 
-            <div
-              className={`overflow-hidden w-full transition-height duration-1000 ease-in-out mt-4  ${
-                signUp ? "h-[350px]" : "h-0"
-              }`}
-            >
-              <CredentialForm/>
+            <div className={` w-full  mt-4`}>
+              <CredentialForm signUp={signUp} />
             </div>
           </>
         )}

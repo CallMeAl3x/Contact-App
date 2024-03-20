@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import "./UserForm.css"
+import "./UserForm.css";
+import Link from "next/link";
 
 function UserForm() {
   const router = useRouter();
@@ -37,11 +38,11 @@ function UserForm() {
     }
   };
   return (
-    <div>
+    <div className="flex justify-center items-center h-[100vh] flex-col">
       <form
         onSubmit={handleSubmit}
         method="post"
-        className="flex flex-col gap-3 "
+        className="flex flex-col gap-3 sm:w-1/4 border-slate-400 border-2 p-4 rounded-lg"
       >
         <div className="animopac">
           <Label htmlFor="name">Name</Label>
@@ -76,7 +77,7 @@ function UserForm() {
             value={formData.password}
           />
         </div>
-        <div className="w-[35%] mx-auto">
+        <div className="sm:w-[35%] mx-auto">
           <Input
             type="submit"
             value={"Create user"}
@@ -84,6 +85,9 @@ function UserForm() {
           />
         </div>
       </form>
+      <Link className="text-right underline" href={"/"}>
+        Back to Menu
+      </Link>
       <p className="text-red-400"> {errorMessage} </p>
     </div>
   );

@@ -88,9 +88,9 @@ export default async function Home({ searchParams }) {
             )}
           </div>
           <div className="my-auto ml-2 flex flex-col gap-1">
-            <h2 className="truncate w-fit font-Jost font-bold text-base">
+            <h1 className="truncate w-fit font-Jost font-bold text-base">
               {session?.user?.name} (Me)
-            </h2>
+            </h1>
             <p className="text-[15px] text-gray font-Jost font-semibold">
               {session ? (
                 <>{session.user.email}</>
@@ -211,13 +211,13 @@ export default async function Home({ searchParams }) {
             <SheetTitle>
               {session ? (
                 <>
-                  <h2 className="text-white font-bold">Déconnectez-vous</h2>
+                  <p className="text-white font-bold">Déconnectez-vous</p>
                 </>
               ) : (
                 <>
-                  <h2 className="text-white font-bold">
+                  <p className="text-white font-bold">
                     Connectez-vous avec :
-                  </h2>
+                  </p>
                 </>
               )}
             </SheetTitle>
