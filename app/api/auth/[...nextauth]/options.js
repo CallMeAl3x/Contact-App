@@ -81,7 +81,7 @@ export const options = {
       if (user) {
         token.role = user.role;
         token.phone = user.phone; // Ajoute le numéro de téléphone au jeton
-        token.id = user._id.toString(); // Ajoute l'ID de l'utilisateur au jeton
+        token.id = user.id || user._id; 
       }
       return token;
     },

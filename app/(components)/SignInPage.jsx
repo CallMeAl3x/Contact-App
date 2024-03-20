@@ -65,7 +65,7 @@ function SignInPage({ session }) {
                 <p className="text-xl text-white">Nous</p>
                 <span>
                   <Image
-                    src={"/homee.svg"}
+                    src={"/logoapp.png"}
                     width={30}
                     height={30}
                     alt="Home Image"
@@ -75,9 +75,10 @@ function SignInPage({ session }) {
             </button>
             <Link
               href={"/Account"}
-              className="text-right text-white font-bold underline "
+              className="text-right text-white font-bold underline flex ml-auto gap-2 "
             >
-              M&apos;inscrire
+              <p>M&apos;inscrire</p>
+              <Image src={'/logoapp.png'} width={20} height={20} alt="logo"/>
             </Link>
 
             <div className={` w-full  mt-4`}>
