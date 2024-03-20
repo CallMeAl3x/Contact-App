@@ -216,7 +216,7 @@ export default async function Home({ searchParams }) {
               ) : (
                 <>
                   <h2 className="text-white font-bold">
-                    Connectez-vous à votre compte
+                    Connectez-vous avec :
                   </h2>
                 </>
               )}

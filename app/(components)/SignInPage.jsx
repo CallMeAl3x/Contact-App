@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Exit from "./Exit";
 import UserForm from "./UserForm";
+import Link from "next/link";
 function SignInPage({ session }) {
   const [signUp, setSignUp] = useState(false);
   const handleSignUp = () => {
@@ -53,12 +54,13 @@ function SignInPage({ session }) {
               </div>
             </button>
             <div className="w-[80%] mx-auto h-[2px] bg-white rounded-full "></div>
+
             <button
               onClick={handleSignUp}
               className="border-2 border-[#25723B] rounded-lg p-4"
             >
               <div className="flex items-center justify-center gap-4">
-                <p className="text-xl text-white">Chez nous</p>
+                <p className="text-xl text-white">Nous</p>
                 <span>
                   <Image
                     src={"/homee.svg"}
@@ -69,6 +71,12 @@ function SignInPage({ session }) {
                 </span>
               </div>
             </button>
+            <Link
+              href={"/Account"}
+              className="text-right text-white font-bold "
+            >
+              M&apos;inscrire
+            </Link>
 
             <div
               className={`overflow-hidden w-full transition-height duration-1000 ease-in-out mt-4  ${
