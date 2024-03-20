@@ -44,7 +44,7 @@ function UserForm() {
         className="flex flex-col gap-3 "
       >
         <div className="animopac">
-          <Label htmlFor="email">Name</Label>
+          <Label htmlFor="name">Name</Label>
           <Input
             type="text"
             name="name"

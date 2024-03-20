@@ -6,6 +6,7 @@ import Image from "next/image";
 import Exit from "./Exit";
 import UserForm from "./UserForm";
 import Link from "next/link";
+import CredentialForm from "./CredentialForm";
 function SignInPage({ session }) {
   const [signUp, setSignUp] = useState(false);
   const handleSignUp = () => {
@@ -83,7 +84,7 @@ function SignInPage({ session }) {
                 signUp ? "h-[350px]" : "h-0"
               }`}
             >
-              <UserForm />
+              <CredentialForm/>
             </div>
           </>
         )}
