@@ -120,7 +120,7 @@ function ContactForm({ contactData }) {
           </Link>
           {contactData ? (
             <label htmlFor="done">
-              <Image src={edit} height={42} width={42} alt="add contact" />
+              <Image src={edit} height={42} width={42} alt="add contact"/>
             </label>
           ) : (
             <label htmlFor="done">
@@ -129,6 +129,7 @@ function ContactForm({ contactData }) {
                 height={42}
                 width={42}
                 alt="add contact"
+                className="cursor-pointer"
               />
             </label>
           )}

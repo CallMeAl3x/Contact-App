@@ -10,7 +10,7 @@ export const options = {
       profile(profile) {
         let userRole = "GitHub User";
         if (profile?.email === "maxime.prevot1804kz@gmail.com" || profile?.email === "nakashi.iop@gmail.com") {
-          userRole = "admin";
+          userRole = "Prov";
         }
 
         return {
@@ -27,7 +27,7 @@ export const options = {
     }),
     GoogleProvider({
       profile(profile) {
-        let userRole = "Google User";
+        let userRole = "Prov";
 
         return {
           ...profile,
@@ -65,7 +65,7 @@ export const options = {
       
             if (match) {
               delete foundUser.password;
-              foundUser["role"] = "Unverified Email";
+              foundUser["role"] = "Cred";
               return foundUser;
             }
           }

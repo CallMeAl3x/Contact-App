@@ -88,7 +88,7 @@ export default async function Home({ searchParams }) {
           </div>
           <div className="my-auto ml-2 flex flex-col gap-1">
             <h1 className="truncate w-fit font-Jost font-bold text-base">
-              {session?.user?.name} (Me)
+              {session?.user?.name} (Me) : 
             </h1>
             <p className="text-[15px] text-gray font-Jost font-semibold">
               {session ? (
@@ -111,7 +111,7 @@ export default async function Home({ searchParams }) {
               </p>
             </div>
           </div>
-          <Link href={`${session ? `/Account/${session.user.id}` : '/api/auth/signin'}`} className=" ml-auto flex items-center">
+          <Link href={session?.user?.role == "Prov" ? `/Account/Prov/${session?.user?.id}` : session?.user?.role == "Cred" ? `/Account/Cred/${session?.user?.id}` : '/api/auth/signin'} className="ml-auto flex items-center">
             <Image src={chevron} width={30} color="#8D8C8F" alt="chevron" />
           </Link>
         </div>
