@@ -74,16 +74,12 @@ function ContactForm({ contactData }) {
     toast({
       variant: "primary",
       title: (
-        <h3 className="text-white font-bold">
-          Connectez-vous pour accéder à ce service.
-        </h3>
-      ),
-      action: (
-        <ToastAction altText="Goto schedule to undo">
-          <Link href={"/api/auth/signin"}>
-            <p className="text-white">Me connecter</p>
-          </Link>
-        </ToastAction>
+        <span className="flex gap-4 items-center">
+          <Image src={"/success.svg"} width={20} height={20} alt="success" />
+          <h3 className="text-white font-bold">
+            La photo a bien été importée.
+          </h3>
+        </span>
       ),
     });
   };

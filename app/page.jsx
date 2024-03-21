@@ -1,5 +1,4 @@
 import Image from "next/image";
-import avatar from "/public/avatar.svg";
 import chevron from "./Images/chevron.svg";
 import box from "./Images/nocontacts.svg";
 import email from "/public/mail.svg";
@@ -80,9 +79,9 @@ export default async function Home({ searchParams }) {
             ) : (
               <>
                 <img
-                  src={avatar}
+                  src={"/avatar2.svg"}
                   alt=""
-                  className="rounded-full w-full h-full"
+                  className="rounded-full w-full h-full p-2"
                 />
               </>
             )}
@@ -112,9 +111,9 @@ export default async function Home({ searchParams }) {
               </p>
             </div>
           </div>
-          <div className=" ml-auto flex items-center">
+          <Link href={`${session ? `/Account/${session.user.id}` : '/api/auth/signin'}`} className=" ml-auto flex items-center">
             <Image src={chevron} width={30} color="#8D8C8F" alt="chevron" />
-          </div>
+          </Link>
         </div>
 
         {contactsToShow.length > 0 && session && (
@@ -212,14 +211,10 @@ export default async function Home({ searchParams }) {
               {session ? (
                 <>
                   <p className="text-white font-bold">Déconnectez-vous</p>
-                  <p className="text-white"> session : {session?.user?.id} </p>
                 </>
               ) : (
                 <>
-                  <p className="text-white font-bold">
-                    Connectez-vous avec :
-                  </p>
-                  
+                  <p className="text-white font-bold">Connectez-vous avec :</p>
                 </>
               )}
             </SheetTitle>
