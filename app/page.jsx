@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import chevron from "./Images/chevron.svg";
 import box from "./Images/nocontacts.svg";
@@ -81,8 +82,7 @@ export default async function Home({ searchParams }) {
           <div
             className={`w-[50px] h-[50px] rounded-full ${
               session?.user?.image ? "" : "bg-white"
-            } outlineperso2 flex items-center justify-center`}
-          >
+            } outlineperso2 flex items-center justify-center`}>
             {session?.user?.image ? (
               <img
                 src={session.user.image}
@@ -103,7 +103,7 @@ export default async function Home({ searchParams }) {
           </div>
           <div className="my-auto ml-2 flex flex-col gap-1">
             <h1 className="truncate w-fit font-Jost font-bold text-base">
-              {session?.user?.name} (Me) :
+              {session?.user?.name}
             </h1>
             <p className="text-[15px] text-gray font-Jost font-semibold">
               {session ? (
@@ -134,15 +134,14 @@ export default async function Home({ searchParams }) {
                 ? `/Account/Cred/${session?.user?.id}`
                 : "/api/auth/signin"
             }
-            className="ml-auto flex items-center"
-          >
+            className="ml-auto flex items-center">
             <Image src={chevron} width={30} color="#8D8C8F" alt="chevron" />
           </Link>
         </div>
 
         <h2 className="text-3xl text-white font-bold mt-6">Ajouts Récents</h2>
 
-        <div className="grid grid-cols-6 gap-4 mt-4">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 mt-4">
           {filterToOneContact.map((contact, index) => (
             <div key={contact._id}>
               {!contact.sameAsPrevious && (
@@ -150,7 +149,7 @@ export default async function Home({ searchParams }) {
                   <Link href={`/ContactPage/${contact._id}`}>
                     <Card className="bg-[#303034]">
                       <CardHeader>
-                        <div className="flex justify-between  items-center rounded-lg">
+                        <div className="flex justify-between  items-center rounded-lg gap-3">
                           <CardTitle className="text-white text-xl">
                             {contact.prenom} {contact.nom}
                           </CardTitle>
@@ -232,7 +231,7 @@ export default async function Home({ searchParams }) {
           </SheetTrigger>
         </div>
 
-        <SheetContent className="bg-primary">
+        <SheetContent className="bg-primary" side="bottom">
           <SheetHeader>
             <SheetTitle>
               {session ? (

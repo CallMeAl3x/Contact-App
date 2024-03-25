@@ -16,7 +16,10 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
 
   return (
     <div>
-      <Button onClick={handleToggle} variant="secondary" className="flex gap-2">
+      <Button
+        onClick={handleToggle}
+        variant="secondary"
+        className="flex gap-2 mt-3 xl:mt-2">
         {toggle ? "Tous les contacts" : "Filtrer par favoris"}
         {toggle ? (
           <Image src={"avatar2.svg"} width={20} height={20} alt="star" />
@@ -32,7 +35,7 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
                 {favoriteContacts2.map((contact, index) => (
                   <motion.div
                     key={contact._id}
-                    initial={{ opacity:0 }} // Animation de départ pour l'entrée
+                    initial={{ opacity: 0 }} // Animation de départ pour l'entrée
                     animate={{ opacity: 1 }} // Animation d'arrivée
                     exit={{ opacity: 0 }} // Animation de sortie
                     transition={{ duration: 0.3 }} // Durée de l'animation
@@ -72,7 +75,7 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
                       <>
                         {index > 0 && <div className="mt-6"></div>}
 
-                        <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-9 w-9 flex justify-center items-center">
+                        <div className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center xl:mt-6">
                           <p className="font-Jost font-bold text-[16px]">
                             {contact.prenom
                               ? contact.prenom[0].toUpperCase()

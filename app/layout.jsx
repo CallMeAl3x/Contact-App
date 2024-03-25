@@ -18,7 +18,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.className}`}>
         <AuthProvider>
-          <div className="mx-5">{children}</div>
+          <div className="mx-5 xl:mx-12">{children}</div>
           <Modal />
         </AuthProvider>
         <Toaster />

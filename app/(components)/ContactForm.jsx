@@ -120,7 +120,7 @@ function ContactForm({ contactData }) {
           </Link>
           {contactData ? (
             <label htmlFor="done">
-              <Image src={edit} height={42} width={42} alt="add contact"/>
+              <Image src={edit} height={42} width={42} alt="add contact" />
             </label>
           ) : (
             <label htmlFor="done">
@@ -189,8 +189,7 @@ function ContactForm({ contactData }) {
 
               <label
                 htmlFor="favorite"
-                className="absolute -top-[0%] right-0 cursor-pointer"
-              >
+                className="absolute -top-[0%] right-0 cursor-pointer">
                 {star ? (
                   <Image
                     src={star_completed}
@@ -223,8 +222,7 @@ function ContactForm({ contactData }) {
           {!contactData && (
             <label
               htmlFor="file"
-              className="cursor-pointer mt-4 rounded-[16px] border-ring border-[1.5px] py-1 px-4"
-            >
+              className="cursor-pointer mt-4 rounded-[16px] border-ring border-[1.5px] py-1 px-4">
               <input
                 type="file"
                 id="file"
@@ -246,13 +244,12 @@ function ContactForm({ contactData }) {
                   onChange={handleChange}
                   id="nom"
                   name="nom"
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Nom de famille"
                 />
                 <label
                   htmlFor="nom"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all"
-                >
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
                   Nom de famille
                 </label>
               </div>
@@ -266,13 +263,12 @@ function ContactForm({ contactData }) {
                   id="nom"
                   name="nom"
                   value={formData.nom}
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Nom de famille"
                 />
                 <label
                   htmlFor="nom"
-                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
-                >
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
                   Nom de famille
                 </label>
               </div>
@@ -287,13 +283,12 @@ function ContactForm({ contactData }) {
                   onChange={handleChange}
                   id="prenom"
                   name="prenom"
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Prénom"
                 />
                 <label
                   htmlFor="prenom"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit  text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all"
-                >
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
                   Prénom
                 </label>
               </div>
@@ -307,13 +302,12 @@ function ContactForm({ contactData }) {
                   id="prenom"
                   name="prenom"
                   value={formData.prenom}
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Prénom"
                 />
                 <label
                   htmlFor="prenom"
-                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
-                >
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
                   Prénom
                 </label>
               </div>
@@ -328,13 +322,12 @@ function ContactForm({ contactData }) {
                   onChange={handleChange}
                   id="tel"
                   name="tel"
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Numéro de téléphone"
                 />
                 <label
                   htmlFor="tel"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all"
-                >
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
                   Numéro de téléphone
                 </label>
               </div>
@@ -348,13 +341,12 @@ function ContactForm({ contactData }) {
                   id="tel"
                   name="tel"
                   value={formData.tel}
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="Numéro de téléphone"
                 />
                 <label
                   htmlFor="tel"
-                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
-                >
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
                   Numéro de téléphone
                 </label>
               </div>
@@ -369,13 +361,12 @@ function ContactForm({ contactData }) {
                   onChange={handleChange}
                   id="email"
                   name="email"
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-2 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="E-mail"
                 />
                 <label
                   htmlFor="email"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-inherit mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all"
-                >
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
                   E-mail
                 </label>
               </div>
@@ -389,13 +380,12 @@ function ContactForm({ contactData }) {
                   id="email"
                   name="email"
                   value={formData.email}
-                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-ring focus:ring-[#EBE7EB] focus:outline-none w-64"
+                  className="peer bg-transparent h-14 rounded-lg placeholder-transparent ring-2 px-3 ring-white focus:ring-[#EBE7EB] focus:outline-none w-64"
                   placeholder="E-mail"
                 />
                 <label
                   htmlFor="email"
-                  className="absolute cursor-text left-2 bg-inherit mx-1 px-1 -top-3  text-sm"
-                >
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
                   E-mail
                 </label>
               </div>

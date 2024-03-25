@@ -75,8 +75,7 @@ async function page({ params }) {
               </Link>
 
               <Link
-                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}
-              >
+                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
                 <Image src={edit} height={42} width={42} alt="edit" />
               </Link>
             </div>
@@ -104,8 +103,7 @@ async function page({ params }) {
 
               <label
                 htmlFor="favorite"
-                className="absolute -top-[6%] right-0 cursor-pointer"
-              >
+                className="absolute -top-[6%] right-0 cursor-pointer">
                 {contactData.favorite ? (
                   <Image
                     src={star_completed}
@@ -142,7 +140,7 @@ async function page({ params }) {
               <Image src={email} alt="mail" width={50} height={50} />
             </div>
 
-            <div class="bg-background rounded-lg">
+            <div class="bg-background rounded-lg flex justify-start lg:justify-center mt-2 xl:mt-4">
               <div class="peer bg-transparent pb-3 rounded-lg ring-ring w-64">
                 <div className="ml-1">
                   <h5 className="font-bold pt-2">Adresse</h5>

@@ -42,21 +42,14 @@ function AddContact() {
                 </ToastAction>
               ),
             });
-          }}
-        >
-          <div className="rounded-full flex items-center justify-center p-1 bg-gray-600">
-            <Image
-              src={add}
-              alt="add"
-              width={32}
-              height={32}
-              className="opacity-40"
-            />
+          }}>
+          <div className="rounded-full flex items-center justify-center p-1 bg-[#123A1B]">
+            <Image src={add} alt="add" width={32} height={32} />
           </div>
         </button>
       ) : (
         <Link href={"/ContactPage/new"}>
-          <div className="rounded-full flex items-center justify-center p-1 bg-[#123A1B]">
+          <div className="rounded-full flex items-center justify-center p-1 bg-[#2BA84D] bg-opacity-20">
             <Image src={add} alt="add" width={32} height={32} />
           </div>
         </Link>

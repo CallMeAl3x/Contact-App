@@ -15,25 +15,25 @@ const getUserDataById = async (id) => {
   return res.json();
 };
 async function page({ params }) {
-    let userData; // Déclaration de la variable
-  
-    const session = await getServerSession(options);
-    if (!session) {
-      redirect("/");
-    }
-    const response = await getUserDataById(params.id);
-    userData = response.foundUser; // Attribution de la valeur
-    return (
-      <div>
-        <p>{params.id}</p>
-        {userData && ( // Vérification de userData avant son utilisation
-          <>
-            <p>{userData.name}</p>
-            <p>{userData.email}</p>
-          </>
-        )}
-      </div>
-    );
+  let userData; // Déclaration de la variable
+
+  const session = await getServerSession(options);
+  if (!session) {
+    redirect("/");
   }
+  const response = await getUserDataById(params.id);
+  userData = response.foundUser; // Attribution de la valeur
+  return (
+    <div>
+      <p>{params.id}</p>
+      {userData && ( // Vérification de userData avant son utilisation
+        <>
+          <p>{userData.name}</p>
+          <p>{userData.email}</p>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default page;
