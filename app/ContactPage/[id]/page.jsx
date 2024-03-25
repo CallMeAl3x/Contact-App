@@ -12,10 +12,8 @@ import unknown_pic from "/public/unknown_pic.svg";
 import star_uncompleted from "/public/star_uncompleted.svg";
 import star_completed from "/public/star_completed.svg";
 import { getServerSession } from "next-auth";
-import {options} from "@/app/api/auth/[...nextauth]/options";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-
-
 
 const getContactDataById = async (id) => {
   const res = await fetch(`http://localhost:3000/api/Contacts/${id}`, {
@@ -31,10 +29,9 @@ const getContactDataById = async (id) => {
 
 async function page({ params }) {
   const session = await getServerSession(options);
-  if (!session){
+  if (!session) {
     redirect("/");
   }
-
 
   const addContact = params.id === "new";
   const editMode = params.id === "update";
@@ -70,7 +67,6 @@ async function page({ params }) {
       );
     } else {
       return (
-        
         <div className="flex flex-col min-h-screen">
           <div className="flex-grow">
             <div className="flex justify-between items-center mt-4">
@@ -79,7 +75,8 @@ async function page({ params }) {
               </Link>
 
               <Link
-                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
+                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}
+              >
                 <Image src={edit} height={42} width={42} alt="edit" />
               </Link>
             </div>
@@ -89,10 +86,10 @@ async function page({ params }) {
                 <>
                   <Image
                     src={contactData.image || unknown_pic}
-                    height="142"
-                    width="142"
+                    height={140}
+                    width={140}
                     alt="Profile picture"
-                    className="rounded-full border-gray border-[2.5px]"
+                    className="rounded-full w-32 h-32 object-cover border-gray border-[2.5px]"
                   />
                 </>
               ) : (
@@ -107,7 +104,8 @@ async function page({ params }) {
 
               <label
                 htmlFor="favorite"
-                className="absolute -top-[6%] right-0 cursor-pointer">
+                className="absolute -top-[6%] right-0 cursor-pointer"
+              >
                 {contactData.favorite ? (
                   <Image
                     src={star_completed}

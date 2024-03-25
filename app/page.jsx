@@ -1,14 +1,15 @@
 import Image from "next/image";
 import chevron from "./Images/chevron.svg";
 import box from "./Images/nocontacts.svg";
-import email from "/public/mail.svg";
-import tel from "/public/tel.svg";
+import { Separator } from "@/components/ui/separator";
+
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
 import React from "react";
 import NavBar from "./(components)/NavBar";
 import SignInPage from "./(components)/SignInPage";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Sheet,
   SheetContent,
@@ -18,6 +19,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Exit from "./(components)/Exit";
+import Contact from "./(components)/Contact";
+import MappingContact from "./(components)/MappingContact";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const getContacts = async () => {
   try {
@@ -58,6 +69,10 @@ export default async function Home({ searchParams }) {
     return { ...contact, showInitial, sameAsPrevious }; // Retourner le contact avec les nouvelles propriétés
   });
 
+  const favoriteContacts2 = contactsToShow.filter(
+    (contact) => contact.favorite
+  );
+
   return (
     <main className="flex flex-col h-full">
       <Sheet>
@@ -74,21 +89,21 @@ export default async function Home({ searchParams }) {
                 alt="User Profile"
                 height={50}
                 width={50}
-                className="rounded-full"
+                className="rounded-full border-[1px] border-white"
               />
             ) : (
               <>
                 <img
                   src={"/avatar2.svg"}
                   alt=""
-                  className="rounded-full w-full h-full p-2"
+                  className="rounded-full w-full h-full p-2 border-[1px] border-white"
                 />
               </>
             )}
           </div>
           <div className="my-auto ml-2 flex flex-col gap-1">
             <h1 className="truncate w-fit font-Jost font-bold text-base">
-              {session?.user?.name} (Me) : 
+              {session?.user?.name} (Me) :
             </h1>
             <p className="text-[15px] text-gray font-Jost font-semibold">
               {session ? (
@@ -99,92 +114,104 @@ export default async function Home({ searchParams }) {
             </p>
             <div className="flex gap-2 text-xs">
               <p className="">
-                {filtredContacts.length > 1
-                  ? `${filtredContacts.length} Contacts`
-                  : `${filtredContacts.length} Contact`}
+                {contactsToShow.length > 1
+                  ? `${contactsToShow.length} Contacts`
+                  : `${contactsToShow.length} Contact`}
               </p>
               <span className="mt-0.5">°</span>
               <p className="text-green font-medium">
-                {favoriteContacts.length > 1
-                  ? `${favoriteContacts.length} Favoris`
-                  : `${favoriteContacts.length} Favoris`}
+                {favoriteContacts2.length > 1
+                  ? `${favoriteContacts2.length} Favoris`
+                  : `${favoriteContacts2.length} Favori`}
               </p>
             </div>
           </div>
-          <Link href={session?.user?.role == "Prov" ? `/Account/Prov/${session?.user?.id}` : session?.user?.role == "Cred" ? `/Account/Cred/${session?.user?.id}` : '/api/auth/signin'} className="ml-auto flex items-center">
+          <Link
+            href={
+              session?.user?.role == "Prov"
+                ? `/Account/Prov/${session?.user?.id}`
+                : session?.user?.role == "Cred"
+                ? `/Account/Cred/${session?.user?.id}`
+                : "/api/auth/signin"
+            }
+            className="ml-auto flex items-center"
+          >
             <Image src={chevron} width={30} color="#8D8C8F" alt="chevron" />
           </Link>
         </div>
 
-        {contactsToShow.length > 0 && session && (
-          <>
-            {contactsToShow.map((contact, index) => (
-              <React.Fragment key={contact._id}>
-                {!contact.sameAsPrevious && (
-                  <>
-                    {index > 0 && <div className="mt-6"></div>}{" "}
-                    {/* Espace entre les groupes */}
-                    <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-9 w-9 flex justify-center items-center">
-                      <p className="font-Jost font-bold text-[16px]">
-                        {contact.prenom ? contact.prenom[0].toUpperCase() : "?"}
-                      </p>
-                    </div>
-                  </>
-                )}
-                <Link href={`/ContactPage/${contact._id}`}>
-                  <div
-                    className={`flex items-center ${
-                      contact.sameAsPrevious
-                        ? "-mt-[1.15px] rounded-t-none before:content-[''] before:absolute before:h-[1px] before:w-[95%] before:bg-gray before:top-0 before:right-0"
-                        : "mt-4 rounded-m"
-                    } shadow-sm w-[95%] bg-[#303034] rounded-md p-3 relative`}
-                  >
-                    <div className="h-10 w-10 flex-shrink-0 bg-gray-300 rounded-full overflow-hidden flex justify-center items-center mr-4">
-                      {contact.image ? (
-                        <Image
-                          src={contact.image}
-                          width={40}
-                          height={40}
-                          alt={contact.prenom}
-                          className="rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="bg-[#1C1C1E] rounded-full border border-ring h-[40px] w-[40px] flex justify-center items-center">
-                          <p className="font-Jost font-bold text-[16px]">
-                            {contact.prenom
-                              ? contact.prenom[0].toUpperCase()
-                              : "?"}
+        <h2 className="text-3xl text-white font-bold mt-6">Ajouts Récents</h2>
+
+        <div className="grid grid-cols-6 gap-4 mt-4">
+          {filterToOneContact.map((contact, index) => (
+            <div key={contact._id}>
+              {!contact.sameAsPrevious && (
+                <>
+                  <Link href={`/ContactPage/${contact._id}`}>
+                    <Card className="bg-[#303034]">
+                      <CardHeader>
+                        <div className="flex justify-between  items-center rounded-lg">
+                          <CardTitle className="text-white text-xl">
+                            {contact.prenom} {contact.nom}
+                          </CardTitle>
+                          {contact.image ? (
+                            <>
+                              <img
+                                src={contact.image}
+                                alt="pp"
+                                className="rounded-full h-12 w-12 border-[1px] border-white object-cover"
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <div className="bg-[#1C1C1E] rounded-full border-[1px] border-white h-12 w-12 flex justify-center items-center">
+                                <p className="font-Jost font-bold text-white text-[16px]">
+                                  {contact.prenom
+                                    ? contact.prenom[0].toUpperCase()
+                                    : "?"}
+                                </p>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <Separator />
+                        <div className="mt-4">
+                          <p className="text-base text-white italic">
+                            {contact.tel &&
+                              contact.tel
+                                .split("")
+                                .map((char, index) => {
+                                  return index % 2 === 0 &&
+                                    index !== 0 &&
+                                    index !== contact.tel.length - 1
+                                    ? ` ${char}`
+                                    : char;
+                                })
+                                .join("")}
+                          </p>
+                          <p className="text-xs text-white italic">
+                            {contact.email}
                           </p>
                         </div>
-                      )}
-                    </div>
-                    <div className="truncate flex-grow">
-                      <p className="text-white font-bold truncate">
-                        {contact.prenom} {contact.nom}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 ml-4">
-                      <Image
-                        src={email}
-                        alt="mail"
-                        width={35}
-                        height={35}
-                        className="flex-shrink-0"
-                      />
-                      <Image
-                        src={tel}
-                        alt="tel"
-                        width={35}
-                        height={35}
-                        className="flex-shrink-0"
-                      />
-                    </div>
-                  </div>
-                </Link>
-              </React.Fragment>
-            ))}
-          </>
-        )}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-3xl text-white font-bold mt-10">Contacts</h2>
+
+        <div className="mt-2">
+          <MappingContact
+            contactsToShow={contactsToShow}
+            favoriteContacts2={favoriteContacts2}
+          />
+        </div>
 
         <div className="ml-auto mr-auto mt-32">
           <SheetTrigger>

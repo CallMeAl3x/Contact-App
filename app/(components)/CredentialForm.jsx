@@ -81,6 +81,7 @@ function CredentialForm({ signUp }) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               exit={{ opacity: 0 }}
+              drag
             >
               <div className="flex flex-col gap-1">
                 <Label htmlFor="password" className="text-white">
