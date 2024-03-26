@@ -170,7 +170,9 @@ export default async function Home({ searchParams }) {
           </Link>
         </div>
 
-        {sortedAndFilteredContacts2.length > 0 && session && (
+        {!query && (
+          <>
+          {sortedAndFilteredContacts2.length > 0 && session && (
           <>
             <h2 className="text-5xl text-white font-bold mt-6">
               Ajouts Récents
@@ -252,6 +254,8 @@ export default async function Home({ searchParams }) {
               </div>
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
+          </>
+        )}
           </>
         )}
 
