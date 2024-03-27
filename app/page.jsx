@@ -21,7 +21,7 @@ import MappingContact from "./(components)/MappingContact";
 
 const getContacts = async () => {
   try {
-    const res = await fetch(`${process.env.BASE_API_URL}/api/Contacts`, {
+    const res = await fetch(`https://${process.env.VERCEL_URL}/api/Contacts`, {
       cache: "no-store",
     });
     return res.json();
@@ -159,10 +159,7 @@ export default async function Accueil({ searchParams }) {
           <>
             {sortedAndFilteredContacts2.length > 0 && session && (
               <>
-                <h2 className="text-4xl text-white font-bold mt-6">
-                  Récents
-                  
-                </h2>
+                <h2 className="text-4xl text-white font-bold mt-6">Récents</h2>
 
                 <ScrollArea className="whitespace-nowrap rounded-md mt-4">
                   <div className="flex w-max space-x-4">
