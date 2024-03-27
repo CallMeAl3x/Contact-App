@@ -67,7 +67,7 @@ export default async function Accueil({ searchParams }) {
   });
   const sortedAndFilteredContacts = filterToOneContact
     .filter((contact) => {
-      return contact.nom.toLowerCase();
+      return contact.nom.toLowerCase().includes(query.toLowerCase());
     })
     .sort((a, b) => {
       const dateA = new Date(a.createdAt);
@@ -175,7 +175,7 @@ export default async function Accueil({ searchParams }) {
             {sortedAndFilteredContacts2.length > 0 && session && (
               <>
                 <h2 className='text-4xl text-white font-bold mt-6'>
-                  Récents
+                  Récents {!query ? (<><p>query vide</p></>):(<><p>query full</p></>)}
                 </h2>
 
                 <ScrollArea className='whitespace-nowrap rounded-md mt-4'>
