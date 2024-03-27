@@ -32,9 +32,6 @@ const getContacts = async () => {
 };
 
 export default async function Accueil({ searchParams }) {
-  if (!BASE_API_URL) {
-    return null;
-  }
   const session = await getServerSession(options);
   const query = searchParams?.contact || "";
   const { contacts } = await getContacts(query);
