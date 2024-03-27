@@ -21,7 +21,7 @@ import MappingContact from "./(components)/MappingContact";
 
 const getContacts = async () => {
   try {
-    const res = await fetch(`${BASE_API_URL}/api/Contacts`, {
+    const res = await fetch(`${process.env.BASE_API_URL}/api/Contacts`, {
       cache: "no-store",
     });
     return res.json();
@@ -160,16 +160,8 @@ export default async function Accueil({ searchParams }) {
             {sortedAndFilteredContacts2.length > 0 && session && (
               <>
                 <h2 className="text-4xl text-white font-bold mt-6">
-                  Récents{" "}
-                  {!query ? (
-                    <>
-                      <p>query vide</p>
-                    </>
-                  ) : (
-                    <>
-                      <p>query full</p>
-                    </>
-                  )}
+                  Récents
+                  
                 </h2>
 
                 <ScrollArea className="whitespace-nowrap rounded-md mt-4">

@@ -8,7 +8,7 @@ function DeleteContact({ id }) {
   const router = useRouter();
 
   const handleDelete = async () => {
-    const res = await fetch(`${BASE_API_URL}/api/Contacts/${id}`, {
+    const res = await fetch(`/api/Contacts/${id}`, {
       method: "DELETE",
     });
     if (res.ok) {

@@ -13,7 +13,7 @@ function ContactFav({ id, contactfav }) {
   const handleFavorite = async (event) => {
     event.preventDefault(); // Empêcher le comportement par défaut du clic sur le lien
     const fav = !contactfav;
-    const res = await fetch(`${BASE_API_URL}/api/Contacts/${id}`, {
+    const res = await fetch(`/api/Contacts/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
