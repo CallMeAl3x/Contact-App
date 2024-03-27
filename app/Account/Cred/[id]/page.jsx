@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
+
 const getUserDataById = async (id) => {
   const res = await fetch(`http://localhost:3000/api/Users/${id}`, {
     cache: "no-store",

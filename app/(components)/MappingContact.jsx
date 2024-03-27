@@ -16,17 +16,23 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
 
   return (
     <div>
-      <Button
-        onClick={handleToggle}
-        variant="secondary"
-        className="flex gap-2 mt-3 xl:mt-2">
-        {toggle ? "Tous les contacts" : "Filtrer par favoris"}
-        {toggle ? (
-          <Image src={"avatar2.svg"} width={20} height={20} alt="star" />
-        ) : (
-          <Image src={"starnorm.svg"} width={20} height={20} alt="star" />
-        )}
-      </Button>
+      {favoriteContacts2.length > 0 && session && (
+        <>
+          <Button
+            onClick={handleToggle}
+            variant="secondary"
+            className="flex gap-2 mt-3 xl:mt-2"
+          >
+            {toggle ? "Tous les contacts" : "Filtrer par favoris"}
+            {toggle ? (
+              <Image src={"avatar2.svg"} width={20} height={20} alt="star" />
+            ) : (
+              <Image src={"starnorm.svg"} width={20} height={20} alt="star" />
+            )}
+          </Button>
+        </>
+      )}
+
       <AnimatePresence>
         {toggle ? (
           <>

@@ -15,6 +15,8 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
+
+
 const getContactDataById = async (id) => {
   const res = await fetch(`http://localhost:3000/api/Contacts/${id}`, {
     cache: "no-store",
@@ -75,7 +77,8 @@ async function page({ params }) {
               </Link>
 
               <Link
-                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
+                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}
+              >
                 <Image src={edit} height={42} width={42} alt="edit" />
               </Link>
             </div>
@@ -103,7 +106,8 @@ async function page({ params }) {
 
               <label
                 htmlFor="favorite"
-                className="absolute -top-[6%] right-0 cursor-pointer">
+                className="absolute -top-[6%] right-0 cursor-pointer"
+              >
                 {contactData.favorite ? (
                   <Image
                     src={star_completed}

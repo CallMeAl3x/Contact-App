@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
-  title: "Contact App",
+  title: "Contact App | Accueil",
   description: "Projet MMI",
 };
 
