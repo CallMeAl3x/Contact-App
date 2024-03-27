@@ -16,7 +16,6 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
 
-
 const getContactDataById = async (id) => {
   const res = await fetch(`http://localhost:3000/api/Contacts/${id}`, {
     cache: "no-store",
