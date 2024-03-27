@@ -3,11 +3,13 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
-
 const getUserDataById = async (id) => {
-  const res = await fetch(`http://localhost:3000/api/Users/${id}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/Users/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed to get data");

@@ -1,8 +1,6 @@
 import Image from "next/image";
 import chevron from "./Images/chevron.svg";
 import box from "./Images/nocontacts.svg";
-import { Separator } from "@/components/ui/separator";
-
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
@@ -19,23 +17,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Exit from "./(components)/Exit";
-import Contact from "./(components)/Contact";
 import MappingContact from "./(components)/MappingContact";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 const getContacts = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Contacts", {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/Contacts`,
+      {
+        cache: "no-store",
+      }
+    );
     return res.json();
   } catch (err) {
     console.log("failed to get ticket");
