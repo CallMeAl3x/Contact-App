@@ -13,16 +13,13 @@ function ContactFav({ id, contactfav }) {
   const handleFavorite = async (event) => {
     event.preventDefault(); // Empêcher le comportement par défaut du clic sur le lien
     const fav = !contactfav;
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/Contacts/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ favorite: fav }),
-      }
-    );
+    const res = await fetch(`${BASE_API_URL}/api/Contacts/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ favorite: fav }),
+    });
 
     if (!res.ok) {
       throw new Error("Failed to update Contact");

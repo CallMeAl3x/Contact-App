@@ -33,12 +33,9 @@ import { Badge } from "@/components/ui/badge";
 
 const getContacts = async () => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/Contacts`,
-      {
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`${BASE_API_URL}/api/Contacts`, {
+      cache: "no-store",
+    });
     return res.json();
   } catch (err) {
     console.log("failed to get ticket");

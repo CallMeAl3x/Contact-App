@@ -8,12 +8,9 @@ function DeleteContact({ id }) {
   const router = useRouter();
 
   const handleDelete = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/Contacts/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const res = await fetch(`${BASE_API_URL}/api/Contacts/${id}`, {
+      method: "DELETE",
+    });
     if (res.ok) {
       router.push("/");
       router.refresh();
