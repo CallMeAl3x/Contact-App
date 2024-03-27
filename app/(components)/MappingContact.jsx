@@ -17,23 +17,25 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
   return (
-    <div>
-      {favoriteContacts2.length > 0 && session && (
-        <>
-          <Button
-            onClick={handleToggle}
-            variant="secondary"
-            className="flex gap-2 mt-3 xl:mt-2"
-          >
-            {toggle ? "Tous les contacts" : "Filtrer par favoris"}
-            {toggle ? (
-              <Image src={"avatar2.svg"} width={20} height={20} alt="star" />
-            ) : (
-              <Image src={"starnorm.svg"} width={20} height={20} alt="star" />
-            )}
-          </Button>
-        </>
-      )}
+    <div className="relative">
+    <div className="absolute top-[50px] transform left-[99%] xl:left-[-2%] text-[14px] font-bold flex items-center flex-col">
+      {alphabet.map((letter) => (
+        <a href={`#${letter}`} key={letter} style={{ display: 'block' }}>
+          {letter}
+        </a>
+      ))}
+    </div>
+      <Button
+        onClick={handleToggle}
+        variant="secondary"
+        className="flex gap-2 mt-3 xl:mt-2">
+        {toggle ? "Tous les contacts" : "Filtrer par favoris"}
+        {toggle ? (
+          <Image src={"avatar2.svg"} width={20} height={20} alt="star" />
+        ) : (
+          <Image src={"starnorm.svg"} width={20} height={20} alt="star" />
+        )}
+      </Button>
 
       <AnimatePresence>
         {toggle ? (
