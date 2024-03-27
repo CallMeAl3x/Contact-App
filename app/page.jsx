@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/sheet";
 import Exit from "./(components)/Exit";
 import MappingContact from "./(components)/MappingContact";
-import { BASE_API_URL } from "./(utils)/constant";
 
 const getContacts = async () => {
   try {
