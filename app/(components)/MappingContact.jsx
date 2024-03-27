@@ -14,6 +14,8 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
     setToggle(!toggle);
   };
 
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
   return (
     <div>
       {favoriteContacts2.length > 0 && session && (
@@ -49,8 +51,7 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
                     {!contact.sameAsPrevious && (
                       <>
                         {index > 0 && <div className="mt-6"></div>}
-
-                        <div className="bg-[#1C1C1E] rounded-full mt-3 border border-ring h-9 w-9 flex justify-center items-center">
+                        <div className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center" id={`${contact.prenom[0].toUpperCase()}`}>
                           <p className="font-Jost font-bold text-[16px]">
                             {contact.prenom
                               ? contact.prenom[0].toUpperCase()
@@ -81,7 +82,7 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
                       <>
                         {index > 0 && <div className="mt-6"></div>}
 
-                        <div className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center xl:mt-6">
+                        <div className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center xl:mt-6" id={`${contact.prenom[0].toUpperCase()}`}>
                           <p className="font-Jost font-bold text-[16px]">
                             {contact.prenom
                               ? contact.prenom[0].toUpperCase()

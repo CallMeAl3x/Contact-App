@@ -63,6 +63,14 @@
     text-wrap: balance;
   }
 
+  body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .Jost {
+    font-family: 'Jost';
+  }
   .placeholder-style::placeholder {
     padding: 5px 12px;
     margin: 5px;
