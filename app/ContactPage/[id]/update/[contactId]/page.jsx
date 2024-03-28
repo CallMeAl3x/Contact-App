@@ -12,6 +12,7 @@ const getContactDataById = async (id) => {
     throw new Error("Failed to get data");
   }
 
+  console.log(res);
   return res.json();
 };
 
