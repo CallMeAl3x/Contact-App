@@ -34,7 +34,7 @@ import { Badge } from "@/components/ui/badge";
 const getContacts = async () => {
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? `https://${process.env.VERCEL_URL}`
+      ? `https://contactappb.netlify.app/`
       : "http://localhost:3000";
   try {
     const res = await fetch(`${baseUrl}/api/Contacts`, {
@@ -42,7 +42,10 @@ const getContacts = async () => {
     });
     return res.json();
   } catch (err) {
-    console.log("failed to get ticket");
+    console.log("Error fetching:", err.message);
+    // Log l'erreur complète si tu as accès à une telle console
+    console.error(err);
+    throw new Error("Error fetching data.");
   }
 };
 
