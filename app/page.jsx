@@ -22,7 +22,7 @@ import MappingContact from "./(components)/MappingContact";
 const getContacts = async () => {
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? `https://contactappb.netlify.app/`
+      ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000";
   try {
     const res = await fetch(`${baseUrl}/api/Contacts`, {

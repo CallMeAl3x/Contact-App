@@ -3,7 +3,7 @@ import React from "react";
 const getContactDataById = async (id) => {
   const baseUrl =
     process.env.NODE_ENV === "production"
-      ? `https://contactappb.netlify.app/`
+      ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/Contacts/${id}`, {
     cache: "no-store",
