@@ -21,7 +21,7 @@ import MappingContact from "./(components)/MappingContact";
 
 const getContacts = async () => {
   try {
-    const res = await fetch(`https://${process.env.VERCEL_URL}/api/Contacts`, {
+    const res = await fetch(`http://${process.env.VERCEL_URL}/api/Contacts`, {
       cache: "no-store",
     });
     return res.json();
