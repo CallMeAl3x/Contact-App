@@ -4,7 +4,11 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
 const getUserDataById = async (id) => {
-  const res = await fetch(`http://${process.env.VERCEL_URL}/api/Users/${id}`, {
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/Users/${id}`, {
     cache: "no-store",
   });
 

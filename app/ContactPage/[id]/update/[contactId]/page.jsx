@@ -1,12 +1,16 @@
 import ContactForm from "@/app/(components)/ContactForm";
 import React from "react";
 const getContactDataById = async (id) => {
-  const res = await fetch(
-    `http://${process.env.VERCEL_URL}/api/Contacts/${id}`,
-    {
-      cache: "no-store",
-    }
-  );
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/Contacts/${id}`, {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to get data");

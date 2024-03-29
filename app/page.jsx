@@ -20,8 +20,12 @@ import Exit from "./(components)/Exit";
 import MappingContact from "./(components)/MappingContact";
 
 const getContacts = async () => {
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
   try {
-    const res = await fetch(`http://${process.env.VERCEL_URL}/api/Contacts`, {
+    const res = await fetch(`${baseUrl}/api/Contacts`, {
       cache: "no-store",
     });
     return res.json();
