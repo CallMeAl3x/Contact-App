@@ -14,36 +14,38 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
     setToggle(!toggle);
   };
 
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   return (
     <div className="relative">
-    <div className="absolute top-[50px] transform left-[99%] xl:left-[-2%] text-[14px] font-bold flex items-center flex-col">
-      {alphabet.map((letter) => (
-        <a href={`#${letter}`} key={letter} style={{ display: 'block' }}>
-          {letter}
-        </a>
-      ))}
-    </div>
+      {favoriteContacts2.length > 0 && session && (
+        <>
+          <div className="absolute top-[50px] transform left-[99%] xl:left-[-2%] text-[14px] font-bold flex items-center flex-col">
+            {alphabet.map((letter) => (
+              <a href={`#${letter}`} key={letter} style={{ display: "block" }}>
+                {letter}
+              </a>
+            ))}
+          </div>{" "}
+        </>
+      )}
 
-
-
-    {favoriteContacts2.length > 0 && session && (
-      <>
-      <Button
-        onClick={handleToggle}
-        variant="secondary"
-        className="flex gap-2 mt-3 xl:mt-2">
-        {toggle ? "Tous les contacts" : "Filtrer par favoris"}
-        {toggle ? (
-          <Image src={"avatar2.svg"} width={20} height={20} alt="star" />
-        ) : (
-          <Image src={"starnorm.svg"} width={20} height={20} alt="star" />
-        )}
-      </Button>
-      </>
-    )}
-      
+      {favoriteContacts2.length > 0 && session && (
+        <>
+          <Button
+            onClick={handleToggle}
+            variant="secondary"
+            className="flex gap-2 mt-3 xl:mt-2"
+          >
+            {toggle ? "Tous les contacts" : "Filtrer par favoris"}
+            {toggle ? (
+              <Image src={"avatar2.svg"} width={20} height={20} alt="star" />
+            ) : (
+              <Image src={"starnorm.svg"} width={20} height={20} alt="star" />
+            )}
+          </Button>
+        </>
+      )}
 
       <AnimatePresence>
         {toggle ? (
@@ -61,7 +63,10 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
                     {!contact.sameAsPrevious && (
                       <>
                         {index > 0 && <div className="mt-6"></div>}
-                        <div className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center" id={`${contact.prenom[0].toUpperCase()}`}>
+                        <div
+                          className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center"
+                          id={`${contact.prenom[0].toUpperCase()}`}
+                        >
                           <p className="font-Jost font-bold text-[16px]">
                             {contact.prenom
                               ? contact.prenom[0].toUpperCase()
@@ -92,7 +97,10 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
                       <>
                         {index > 0 && <div className="mt-6"></div>}
 
-                        <div className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center xl:mt-6" id={`${contact.prenom[0].toUpperCase()}`}>
+                        <div
+                          className="bg-[#1C1C1E] rounded-full mt-8 border border-ring h-9 w-9 flex justify-center items-center xl:mt-6"
+                          id={`${contact.prenom[0].toUpperCase()}`}
+                        >
                           <p className="font-Jost font-bold text-[16px]">
                             {contact.prenom
                               ? contact.prenom[0].toUpperCase()
