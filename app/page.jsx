@@ -19,18 +19,18 @@ import {
 import Exit from "./(components)/Exit";
 import MappingContact from "./(components)/MappingContact";
 
-const getContacts = async () => {
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
+const getContacts = async (req) => {
+  const baseUrl = req.headers.origin; // Utilisez l'origine de la requête entrante
   try {
     const res = await fetch(`${baseUrl}/api/Contacts`, {
+      headers: {
+        cookie: req.headers.cookie, // Transmettez le cookie de la requête
+      },
       cache: "no-store",
     });
     return res.json();
   } catch (err) {
-    console.log("failed to get ticket");
+    console.log("failed to get contacts");
   }
 };
 
@@ -102,7 +102,8 @@ export default async function Accueil({ searchParams }) {
           <div
             className={`w-[50px] h-[50px] rounded-full ${
               session?.user?.image ? "" : "bg-white"
-            } outlineperso2 flex items-center justify-center`}>
+            } outlineperso2 flex items-center justify-center`}
+          >
             {session?.user?.image ? (
               <img
                 src={session.user.image}
@@ -154,7 +155,8 @@ export default async function Accueil({ searchParams }) {
                 ? `/Account/Cred/${session?.user?.id}`
                 : "/api/auth/signin"
             }
-            className="ml-auto flex items-center">
+            className="ml-auto flex items-center"
+          >
             <Image src={chevron} width={30} color="#8D8C8F" alt="chevron" />
           </Link>
         </div>
@@ -173,7 +175,8 @@ export default async function Accueil({ searchParams }) {
                           <>
                             <Link
                               href={`/ContactPage/${contact._id}`}
-                              className="hover:shadow">
+                              className="hover:shadow"
+                            >
                               <div className="bg-[#303034] rounded-[14px] p-5 pt-4 pb-0 min-w-[130px] max-w-[155px] xl:max-w-[240px] xl:min-w-[180px]">
                                 <div className="flex justify-between  items-center rounded-lg gap-4">
                                   {contact.image ? (
