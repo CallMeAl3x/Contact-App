@@ -25,6 +25,11 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
         </a>
       ))}
     </div>
+
+
+
+    {favoriteContacts2.length > 0 && session && (
+      <>
       <Button
         onClick={handleToggle}
         variant="secondary"
@@ -36,6 +41,9 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
           <Image src={"starnorm.svg"} width={20} height={20} alt="star" />
         )}
       </Button>
+      </>
+    )}
+      
 
       <AnimatePresence>
         {toggle ? (
