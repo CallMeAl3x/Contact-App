@@ -19,20 +19,21 @@ import {
 import Exit from "./(components)/Exit";
 import MappingContact from "./(components)/MappingContact";
 
-const getContacts = async (req) => {
-  const baseUrl = req.headers.origin; // Utilisez l'origine de la requête entrante
+const getContacts = async () => {
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
   try {
     const res = await fetch(`${baseUrl}/api/Contacts`, {
-      headers: {
-        cookie: req.headers.cookie, // Transmettez le cookie de la requête
-      },
       cache: "no-store",
     });
     return res.json();
   } catch (err) {
-    console.log("failed to get contacts");
+    console.log("failed to get ticket");
   }
 };
+
 export default async function Accueil({ searchParams }) {
   const session = await getServerSession(options);
   const query = searchParams?.contact || "";
