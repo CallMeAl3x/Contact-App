@@ -5,6 +5,7 @@ mongoose.Promise = global.Promise;
 
 const contactSchema = new Schema(
   {
+    adresse: String,
     favorite: Boolean,
     prenom: String,
     nom: String,
@@ -12,6 +13,7 @@ const contactSchema = new Schema(
     email: String,
     image:String,
     createurID : String,
+    
   },
   {
     timestamps: true,

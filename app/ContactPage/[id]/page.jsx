@@ -134,7 +134,7 @@ async function page({ params }) {
               <div class="peer bg-transparent pb-3 rounded-lg ring-ring w-64">
                 <div className="ml-1">
                   <h5 className="font-bold pt-2">Adresse</h5>
-                  <p className="pt-2">28B Rue des fontaines</p>
+                  <p className="pt-2"> {contactData.adresse}</p>
                 </div>
               </div>
             </div>
