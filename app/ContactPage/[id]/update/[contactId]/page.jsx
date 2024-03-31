@@ -3,10 +3,10 @@ import React from "react";
 import { fetchOneContact } from "@/app/api/Contacts/[id]/route";
 
 async function page({ params }) {
-  let contactData = {};
+  
 
-  const contactDatanojson = await fetchOneContact(params.id);
-  contactData = contactDataResponse ? JSON.stringify(contactDatanojson) : {};
+  const contactData = await fetchOneContact(params.id);
+  
 
   return (
     <div>
