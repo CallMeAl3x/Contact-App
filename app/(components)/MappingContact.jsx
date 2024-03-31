@@ -18,7 +18,7 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
 
   return (
     <div className="relative">
-      {favoriteContacts2.length > 0 && session && (
+      {contactsToShow.length > 0 && session && (
         <>
           <div className="absolute top-[50px] transform left-[99%] xl:left-[-2%] text-[14px] font-bold flex items-center flex-col">
             {alphabet.map((letter) => (
@@ -26,11 +26,11 @@ function MappingContact({ contactsToShow, favoriteContacts2 }) {
                 {letter}
               </a>
             ))}
-          </div>{" "}
+          </div>
         </>
       )}
 
-      {favoriteContacts2.length > 0 && session && (
+      {contactsToShow.length > 0 && session && (
         <>
           <Button
             onClick={handleToggle}

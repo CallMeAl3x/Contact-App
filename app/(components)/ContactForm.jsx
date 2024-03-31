@@ -167,7 +167,6 @@ function ContactForm({ contactData }) {
                         alt="Preview"
                         className="rounded-full object-cover border-gray border-[2.5px] w-32 h-32"
                       />
-                      <p className="preview2">Preview</p>
                     </div>
                   </>
                 ) : (
