@@ -2,12 +2,10 @@ import { NextResponse } from "next/server";
 import Contact from "@/app/(models)/Contact";
 
 
-export async function GET(req, { params }) {
+export async function fetchOneContact(params) {
   try {
-    const { id } = params;
-
-    const foundContact = await Contact.findOne({ _id: id });
-    return NextResponse.json({ foundContact }, { status: 200 });
+    const id  = params;
+    return await Contact.findOne({ _id: id });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   }

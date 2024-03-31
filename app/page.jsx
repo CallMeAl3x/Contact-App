@@ -20,9 +20,7 @@ import Exit from "./(components)/Exit";
 import MappingContact from "./(components)/MappingContact";
 import { fetchContacts } from "./api/Contacts/route";
 
-
 export default async function Accueil({ searchParams }) {
-
   const session = await getServerSession(options);
   const query = searchParams?.contact || "";
   const contactsnojson = await fetchContacts(query);
