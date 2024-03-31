@@ -13,10 +13,10 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function fetchContacts() {
   try {
-    const contacts = await Contact.find();
-    return NextResponse.json({ contacts }, { status: 200 });
+    
+    return await Contact.find();
   } catch (err) {
     return NextResponse(
       { message: "Failed to get infos", err },

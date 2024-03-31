@@ -18,26 +18,15 @@ import {
 } from "@/components/ui/sheet";
 import Exit from "./(components)/Exit";
 import MappingContact from "./(components)/MappingContact";
+import { fetchContacts } from "./api/Contacts/route";
 
-const getContacts = async () => {
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-  try {
-    const res = await fetch(`${baseUrl}/api/Contacts`, {
-      cache: "no-store",
-    });
-    return res.json();
-  } catch (err) {
-    console.log("failed to get ticket");
-  }
-};
 
 export default async function Accueil({ searchParams }) {
+
   const session = await getServerSession(options);
   const query = searchParams?.contact || "";
-  const { contacts } = await getContacts(query);
+  const contactsnojson = await fetchContacts(query);
+  const contacts = JSON.parse(JSON.stringify(contactsnojson));
 
   const favoriteContacts = contacts.filter((contact) => contact.favorite);
   const filtredContacts = contacts.filter((contact) => {
