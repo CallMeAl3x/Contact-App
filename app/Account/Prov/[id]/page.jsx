@@ -52,8 +52,6 @@ async function page({ params }) {
             {session?.user?.name}
           </p>
 
-          <p className="font-regular">{session?.user?.tel}</p>
-
           <p className="font-semibold text-gray text-base">
             {session?.user?.email}
           </p>
@@ -63,15 +61,6 @@ async function page({ params }) {
           <Image src={tel} alt="tel" width={50} height={50} />
           <Image src={message} alt="message" width={50} height={50} />
           <Image src={mail} alt="mail" width={50} height={50} />
-        </div>
-
-        <div class="bg-background rounded-lg flex justify-start xl:justify-center xl:mt-8 mt-4">
-          <div class="peer bg-transparent pb-3 rounded-lg ring-ring w-64">
-            <div className="ml-1">
-              <h5 className="font-bold pt-2">Adresse</h5>
-              <p className="pt-2">Ajouter une adresse dans le model</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

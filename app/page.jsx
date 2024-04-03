@@ -44,6 +44,10 @@ export default async function Accueil({ searchParams }) {
     }
   });
 
+  let premierelettreprenom2 = "";
+
+  premierelettreprenom2 = session?.user.name;
+
   const sortedContacts2 = contacts.sort((a, b) =>
     a.prenom.localeCompare(b.prenom, "fr", { sensitivity: "base" })
   );
@@ -91,14 +95,21 @@ export default async function Accueil({ searchParams }) {
                 width={50}
                 className="rounded-full border-[1px] border-white"
               />
+            ) : premierelettreprenom2 ? (
+              <div className="bg-[#1C1C1E] rounded-full border border-ring h-[50px] w-[50px] flex justify-center items-center">
+                <p className="font-Jost font-bold text-[30px] -mt-1">
+                  {premierelettreprenom2}
+                </p>
+              </div>
             ) : (
-              <>
-                <img
-                  src={"/avatar2.svg"}
-                  alt=""
-                  className="rounded-full w-full h-full p-2 border-[1px] border-white"
-                />
-              </>
+              // Remplacez 'path_to_your_alternate_image' par le chemin de votre image de remplacement
+              <img
+                src="/avatar2.svg"
+                alt="Default Profile"
+                height={50}
+                width={50}
+                className="rounded-full border-[1px] border-white p-1"
+              />
             )}
           </div>
           <div className="my-auto ml-2 flex flex-col gap-1">

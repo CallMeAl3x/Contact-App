@@ -117,9 +117,9 @@ function ContactForm({ contactData }) {
   return (
     <div className="flex justify-center items-center">
       <form
-        className="flex flex-col gap-3 sm:mt-8 xl:mt-10 w-full"
+        className="flex flex-col gap-3 sm:mt-8 xl:mt-6 w-full"
         onSubmit={handleSubmit}>
-        <div className="flex justify-between mt-4 items-center">
+        <div className="flex justify-between items-center">
           <Link href={"../"}>
             <Image src={retour} alt="retour" height={38} width={38} />
           </Link>
@@ -249,6 +249,7 @@ function ContactForm({ contactData }) {
             <div className="bg-background rounded-lg">
               <div className="relative bg-inherit">
                 <input
+                  required
                   type="text"
                   onChange={handleChange}
                   id="nom"
@@ -267,6 +268,7 @@ function ContactForm({ contactData }) {
             <div className="bg-background rounded-lg">
               <div className="relative bg-inherit">
                 <input
+                  required
                   type="text"
                   onChange={handleChange}
                   id="nom"
@@ -288,6 +290,7 @@ function ContactForm({ contactData }) {
             <div className="bg-background rounded-lg">
               <div className="relative bg-inherit">
                 <input
+                  required
                   type="text"
                   onChange={handleChange}
                   id="prenom"
@@ -306,6 +309,7 @@ function ContactForm({ contactData }) {
             <div className="bg-background rounded-lg">
               <div className="relative bg-inherit">
                 <input
+                  required
                   type="text"
                   onChange={handleChange}
                   id="prenom"

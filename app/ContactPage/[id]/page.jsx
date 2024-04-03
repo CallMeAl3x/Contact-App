@@ -128,14 +128,16 @@ async function page({ params }) {
               <Image src={email} alt="mail" width={50} height={50} />
             </div>
 
-            <div class="bg-background rounded-lg flex justify-start lg:justify-center mt-2 xl:mt-4">
-              <div class="peer bg-transparent pb-3 rounded-lg ring-ring w-64">
-                <div className="ml-1">
-                  <h5 className="font-bold pt-2">Adresse</h5>
-                  <p className="pt-2"> {contactData.adresse}</p>
+            {contactData.adresse && (
+              <div class="bg-background rounded-lg flex justify-start lg:justify-center mt-2 xl:mt-4">
+                <div class="peer bg-transparent pb-3 rounded-lg ring-ring w-64">
+                  <div className="ml-1">
+                    <h5 className="font-bold pt-2">Adresse</h5>
+                    <p className="pt-2"> {contactData.adresse}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           <DeleteContact id={contactData._id} />
