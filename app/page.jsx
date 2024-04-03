@@ -270,14 +270,26 @@ export default async function Accueil({ searchParams }) {
             {!session && (
               <>
                 <div className="">
-                  <Image src={box} alt="box" width={170} height={170} />
+                  <Image
+                    src={box}
+                    loading="lazy"
+                    alt="box"
+                    width={170}
+                    height={170}
+                  />
                 </div>
               </>
             )}
             {!contactsToShow.length > 0 && session && (
               <>
                 <Link className="" href={"/ContactPage/new"}>
-                  <Image src={box} alt="box" width={170} height={170} />
+                  <Image
+                    src={box}
+                    loading="lazy"
+                    alt="box"
+                    width={170}
+                    height={170}
+                  />
                 </Link>
               </>
             )}
