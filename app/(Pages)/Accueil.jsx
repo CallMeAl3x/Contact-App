@@ -124,6 +124,7 @@ export default async function Accueil({ searchParams }) {
                 alt="User Profile"
                 height={50}
                 width={50}
+                loading="lazy"
                 className="rounded-full border-[1px] border-white"
               />
             ) : (
@@ -131,6 +132,7 @@ export default async function Accueil({ searchParams }) {
                 <img
                   src={"/avatar2.svg"}
                   alt=""
+                  loading="lazy"
                   className="rounded-full w-full h-full p-2 border-[1px] border-white"
                 />
               </>
@@ -154,7 +156,7 @@ export default async function Accueil({ searchParams }) {
                   : `${contactsToShow.length} Contact`}
               </p>
               <span className="mt-0.5">°</span>
-              <p className="text-green font-medium">
+              <p className=" text-green-600 font-medium ">
                 {favoriteContacts2.length > 1
                   ? `${favoriteContacts2.length} Favoris`
                   : `${favoriteContacts2.length} Favori`}
@@ -206,7 +208,8 @@ export default async function Accueil({ searchParams }) {
                                     <>
                                       <img
                                         src={contact.image}
-                                        alt="pp"
+                                        alt="Profile picture"
+                                        loading="lazy"
                                         className="rounded-full h-[38px] w-[38px] xl:h-[50px] xl:w-[50px] border-[1px] border-white object-cover"
                                       />
                                     </>

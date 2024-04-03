@@ -21,9 +21,9 @@ function Exit() {
   return (
     <div className="flex flex-col gap-4">
       <button
+        aria-label="se deconnecter"
         onClick={() => signOut({ callbackUrl: "/" })}
-        className="border-2 border-destructive rounded-lg p-4  "
-      >
+        className="border-2 border-destructive rounded-lg p-4  ">
         <div className="flex justify-center items-center gap-4">
           <p className="text-xl text-destructive font-bold">Deconnexion</p>
           <Image src={exit} width={30} height={30} alt="exit" />

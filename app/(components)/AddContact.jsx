@@ -25,6 +25,7 @@ function AddContact() {
     <div>
       {disabled ? (
         <button
+          aria-label="Se connecter"
           className=""
           onClick={() => {
             toast({

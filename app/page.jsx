@@ -93,6 +93,7 @@ export default async function Accueil({ searchParams }) {
                 alt="User Profile"
                 height={50}
                 width={50}
+                loading="lazy"
                 className="rounded-full border-[1px] border-white"
               />
             ) : premierelettreprenom2 ? (
@@ -104,6 +105,7 @@ export default async function Accueil({ searchParams }) {
             ) : (
               // Remplacez 'path_to_your_alternate_image' par le chemin de votre image de remplacement
               <img
+                loading="lazy"
                 src="/avatar2.svg"
                 alt="Default Profile"
                 height={50}
@@ -130,7 +132,7 @@ export default async function Accueil({ searchParams }) {
                   : `${contactsToShow.length} Contact`}
               </p>
               <span className="mt-0.5">°</span>
-              <p className="text-green font-medium">
+              <p className="text-green-400 font-medium">
                 {favoriteContacts2.length > 1
                   ? `${favoriteContacts2.length} Favoris`
                   : `${favoriteContacts2.length} Favori`}
@@ -170,6 +172,7 @@ export default async function Accueil({ searchParams }) {
                                   {contact.image ? (
                                     <>
                                       <img
+                                        loading="lazy"
                                         src={contact.image}
                                         alt="pp"
                                         className="rounded-full h-[38px] w-[38px] xl:h-[50px] xl:w-[50px] border-[1px] border-white object-cover"

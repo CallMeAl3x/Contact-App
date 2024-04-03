@@ -25,6 +25,7 @@ function Contact({ contact }) {
                 width={60}
                 height={60}
                 alt={contact.prenom}
+                loading="lazy"
                 className="rounded-full object-cover max-w-full "
               />
             ) : (
@@ -57,6 +58,7 @@ function Contact({ contact }) {
                   src={star_completed}
                   width={35}
                   height={35}
+                  loading="lazy"
                   alt="Add to favorite"
                 />
               ) : (
@@ -87,7 +89,14 @@ function Contact({ contact }) {
         </motion.div>
         <div className="absolute top-[1px] left-0 flex justify-between h-[97%] z-0 w-[95%]">
           <div className="flex items-center bg-red-600 gap-3 font-semibold rounded-xl w-1/2">
-            <img src="delete.svg" className="ml-4" alt="" />
+            <img
+              src="delete.svg"
+              height={30}
+              width={30}
+              className="ml-4"
+              alt=""
+              loading="lazy"
+            />
           </div>
 
           <div className="flex items-center text-white gap-3 font-semibold w-1/2 bg-white h-full rounded-xl justify-end">
@@ -97,6 +106,7 @@ function Contact({ contact }) {
               width={30}
               height={30}
               className="mr-4"
+              loading="lazy"
             />
           </div>
         </div>

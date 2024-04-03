@@ -29,6 +29,7 @@ async function page({ params }) {
           {session?.user?.image ? (
             <>
               <img
+                loading="lazy"
                 src={session?.user?.image || unknown_pic}
                 height={140}
                 width={140}
