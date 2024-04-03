@@ -55,7 +55,7 @@ async function page({ params }) {
       );
     } else {
       return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen w-full">
           <div className="flex-grow">
             <div className="flex justify-between items-center mt-4">
               <Link href={"../"}>
@@ -63,8 +63,7 @@ async function page({ params }) {
               </Link>
 
               <Link
-                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}
-              >
+                href={`/ContactPage/${contactData._id}/update/${contactData._id}`}>
                 <Image src={edit} height={42} width={42} alt="edit" />
               </Link>
             </div>
@@ -92,8 +91,7 @@ async function page({ params }) {
 
               <label
                 htmlFor="favorite"
-                className="absolute -top-[6%] right-0 cursor-pointer"
-              >
+                className="absolute -top-[6%] right-0 cursor-pointer">
                 {contactData.favorite ? (
                   <Image
                     src={star_completed}

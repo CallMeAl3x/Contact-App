@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projet Next.js
 
-## Getting Started
+Ce projet a été initialisé avec [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-First, run the development server:
+## Pour commencer
+
+Premièrement, installez toutes les dépendances :
+
+```bash
+npm install
+# ou si vous utilisez Yarn
+yarn
+# ou pour pnpm
+pnpm install
+# ou pour Bun
+bun install
+```
+
+Ensuite, lancez le serveur de développement :
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Configuration de l'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Avant de démarrer l'application, assurez-vous de configurer le fichier `.env` avec vos informations personnelles, notamment les paramètres de connexion à votre base de données MongoDB.
 
-## Learn More
+### Initialisation de la base de données MongoDB
 
-To learn more about Next.js, take a look at the following resources:
+Vous devez créer et initialiser une base de données MongoDB. Assurez-vous que les informations de connexion à cette base de données sont correctement configurées dans le fichier `.env`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## En savoir plus
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Pour apprendre davantage sur Next.js, consultez les ressources suivantes :
 
-## Deploy on Vercel
+- [Documentation de Next.js](https://nextjs.org/docs) - pour comprendre les fonctionnalités de Next.js et son API.
+- [Apprendre Next.js](https://nextjs.org/learn) - un tutoriel interactif sur Next.js.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Vous pouvez également consulter [le dépôt GitHub de Next.js](https://github.com/vercel/next.js/) - vos retours et contributions sont les bienvenus !

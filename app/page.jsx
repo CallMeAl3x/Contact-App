@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import chevron from "./Images/chevron.svg";
 import box from "./Images/nocontacts.svg";
@@ -25,10 +26,11 @@ export default async function Accueil({ searchParams }) {
   const query = searchParams?.contact || "";
   const contactsnojson = await fetchContacts(query);
   const contacts = JSON.parse(JSON.stringify(contactsnojson));
-
-  const favoriteContacts = contacts.filter((contact) => contact.favorite);
   const filtredContacts = contacts.filter((contact) => {
-    return contact.nom.toLowerCase().includes(query.toLowerCase());
+    return (
+      contact.nom.toLowerCase().includes(query.toLowerCase()) ||
+      contact.prenom.toLowerCase().includes(query.toLowerCase())
+    );
   });
 
   const sortedContacts = filtredContacts.sort((a, b) =>
@@ -41,15 +43,6 @@ export default async function Accueil({ searchParams }) {
       return null;
     }
   });
-  const sortedAndFilteredContacts = filterToOneContact
-    .filter((contact) => {
-      return contact.nom.toLowerCase().includes(query.toLowerCase());
-    })
-    .sort((a, b) => {
-      const dateA = new Date(a.createdAt);
-      const dateB = new Date(b.createdAt);
-      return dateB - dateA;
-    });
 
   const sortedContacts2 = contacts.sort((a, b) =>
     a.prenom.localeCompare(b.prenom, "fr", { sensitivity: "base" })
@@ -89,8 +82,7 @@ export default async function Accueil({ searchParams }) {
           <div
             className={`w-[50px] h-[50px] rounded-full ${
               session?.user?.image ? "" : "bg-white"
-            } outlineperso2 flex items-center justify-center`}
-          >
+            } outlineperso2 flex items-center justify-center`}>
             {session?.user?.image ? (
               <img
                 src={session.user.image}
@@ -142,8 +134,7 @@ export default async function Accueil({ searchParams }) {
                 ? `/Account/Cred/${session?.user?.id}`
                 : "/api/auth/signin"
             }
-            className="ml-auto flex items-center"
-          >
+            className="ml-auto flex items-center">
             <Image src={chevron} width={30} color="#8D8C8F" alt="chevron" />
           </Link>
         </div>
@@ -162,8 +153,7 @@ export default async function Accueil({ searchParams }) {
                           <>
                             <Link
                               href={`/ContactPage/${contact._id}`}
-                              className="hover:shadow"
-                            >
+                              className="hover:shadow">
                               <div className="bg-[#303034] rounded-[14px] p-5 pt-4 pb-0 min-w-[130px] max-w-[155px] xl:max-w-[240px] xl:min-w-[180px]">
                                 <div className="flex justify-between  items-center rounded-lg gap-4">
                                   {contact.image ? (
