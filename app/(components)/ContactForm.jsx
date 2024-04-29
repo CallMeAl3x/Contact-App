@@ -58,7 +58,6 @@ function ContactForm({ contactData }) {
         [name]: value,
       }));
     }
-    console.log("formData before fetch:", formData); // Ajouter ce console.log
   };
 
   const convertToBase64 = (file) => {
@@ -117,8 +116,9 @@ function ContactForm({ contactData }) {
   return (
     <div className="flex justify-center items-center">
       <form
-        className="flex flex-col gap-3 sm:mt-8 xl:mt-6 w-full"
-        onSubmit={handleSubmit}>
+        className="flex flex-col gap-3 sm:mt-8 xl:mt-6 w-full mt-6"
+        onSubmit={handleSubmit}
+      >
         <div className="flex justify-between items-center">
           <Link href={"../"}>
             <Image src={retour} alt="retour" height={38} width={38} />
@@ -198,7 +198,8 @@ function ContactForm({ contactData }) {
 
               <label
                 htmlFor="favorite"
-                className="absolute -top-[0%] right-0 cursor-pointer">
+                className="absolute -top-[0%] right-0 cursor-pointer"
+              >
                 {star ? (
                   <Image
                     src={star_completed}
@@ -231,7 +232,8 @@ function ContactForm({ contactData }) {
           {!contactData && (
             <label
               htmlFor="file"
-              className="cursor-pointer mt-4 rounded-[16px] border-ring border-[1.5px] py-1 px-4">
+              className="cursor-pointer mt-4 rounded-[16px] border-ring border-[1.5px] py-1 px-4"
+            >
               <input
                 type="file"
                 id="file"
@@ -259,7 +261,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="nom"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all"
+                >
                   Nom de famille
                 </label>
               </div>
@@ -279,7 +282,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="nom"
-                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm"
+                >
                   Nom de famille
                 </label>
               </div>
@@ -300,7 +304,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="prenom"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all"
+                >
                   Prénom
                 </label>
               </div>
@@ -320,7 +325,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="prenom"
-                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm"
+                >
                   Prénom
                 </label>
               </div>
@@ -340,7 +346,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="tel"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all"
+                >
                   Numéro de téléphone
                 </label>
               </div>
@@ -359,7 +366,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="tel"
-                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm"
+                >
                   Numéro de téléphone
                 </label>
               </div>
@@ -379,7 +387,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="email"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all">
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm transition-all"
+                >
                   E-mail
                 </label>
               </div>
@@ -398,7 +407,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="email"
-                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm"
+                >
                   E-mail
                 </label>
               </div>
@@ -418,7 +428,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="adresse"
-                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all">
+                  className="absolute cursor-text left-2 -top-3 text-base bg-[#212224] text-mx-1 px-1 peer-placeholder-shown:text-lg  peer-placeholder-shown:top-3 peer-focus:-top-3  peer-focus:text-sm transition-all"
+                >
                   Adresse
                 </label>
               </div>
@@ -437,7 +448,8 @@ function ContactForm({ contactData }) {
                 />
                 <label
                   htmlFor="adresse"
-                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm">
+                  className="absolute cursor-text left-2 bg-[#212224] mx-1 px-1 -top-3  text-sm"
+                >
                   Adresse
                 </label>
               </div>
