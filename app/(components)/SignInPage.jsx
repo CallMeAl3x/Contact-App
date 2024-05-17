@@ -20,22 +20,7 @@ function SignInPage({ session }) {
           </>
         ) : (
           <>
-            <button
-              aria-label="se connecter avec Github"
-              onClick={() => signIn("github")}
-              className="border-2 border-white rounded-lg p-4 duration-300 ease-in-out hover:bg-gray-800">
-              <div className="flex items-center justify-center gap-4">
-                <p className="text-xl text-white">Github</p>
-                <span>
-                  <Image
-                    src={"/github23.png"}
-                    width={30}
-                    height={30}
-                    alt="Google Image"
-                  />
-                </span>
-              </div>
-            </button>
+            
 
             <button
               aria-label="se connecter avec Google"

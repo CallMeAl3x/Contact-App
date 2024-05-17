@@ -6,25 +6,6 @@ import User from "@/app/(models)/User";
 
 export const options = {
   providers: [
-    GitHubProvider({
-      profile(profile) {
-        let userRole = "GitHub User";
-        if (profile?.email === "maxime.prevot1804kz@gmail.com" || profile?.email === "nakashi.iop@gmail.com") {
-          userRole = "Prov";
-        }
-
-        return {
-          ...profile,
-          id: profile.id,
-          role: userRole,
-          image: profile.avatar_url,
-          phone: profile.phone, // Ajouter le numéro de téléphone depuis le profil GitHub si disponible
-          // Ajouter l'image depuis le profil GitHub
-        };
-      },
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_Secret,
-    }),
     GoogleProvider({
       profile(profile) {
         let userRole = "Prov";
@@ -58,11 +39,16 @@ export const options = {
       },
       async authorize(credentials) {
         try {
-          const foundUser = await User.findOne({ email: credentials.email }).lean().exec();
-      
+          const foundUser = await User.findOne({ email: credentials.email })
+            .lean()
+            .exec();
+
           if (foundUser) {
-            const match = await bcrypt.compare(credentials.password, foundUser.password);
-      
+            const match = await bcrypt.compare(
+              credentials.password,
+              foundUser.password
+            );
+
             if (match) {
               delete foundUser.password;
               foundUser["role"] = "Cred";
@@ -73,7 +59,7 @@ export const options = {
           console.log(err);
         }
         return null;
-      },      
+      },
     }),
   ],
   callbacks: {
@@ -81,7 +67,7 @@ export const options = {
       if (user) {
         token.role = user.role;
         token.phone = user.phone; // Ajoute le numéro de téléphone au jeton
-        token.id = user.id || user._id; 
+        token.id = user.id || user._id;
       }
       return token;
     },
