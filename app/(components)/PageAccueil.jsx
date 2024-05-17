@@ -21,12 +21,12 @@ import Exit from "@/app/(components)/Exit";
 import MappingContact from "@/app/(components)/MappingContact";
 import { fetchContacts } from "@/app/api/Contacts/route";
 
- export async function wait(ms){
-    return new Promise (resolve=>setTimeout(resolve,ms));
- }
+ // export async function wait(ms){
+   // return new Promise (resolve=>setTimeout(resolve,ms));
+ // }
 
 export default async function PageAccueil({ searchParams }) {
-    await wait(3000);
+  //  await wait(3000);
   const session = await getServerSession(options);
   const query = searchParams?.contact || "";
   const contactsnojson = await fetchContacts(query);
