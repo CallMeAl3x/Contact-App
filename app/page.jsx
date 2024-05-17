@@ -9,9 +9,9 @@ export default function Accueil({ searchParams }) {
       <Suspense
         fallback={
           <>
-            <div className="w-[20%] mx-auto rounded-full items-center flex gap-2 mt-6">
+            <div className="w-[35%] mx-auto rounded-full items-center flex gap-2 mt-6">
               {" "}
-              <Skeleton count={1} height={35} width={275} className="" />
+              <Skeleton count={1} height={35} width={350} className="" />
               <Skeleton count={1} height={35} width={35} circle className="" />
               <Skeleton count={1} height={35} width={35} circle className="" />
             </div>
