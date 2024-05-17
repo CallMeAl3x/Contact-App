@@ -16,11 +16,8 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
 import { fetchOneContact } from "@/app/api/Contacts/[id]/route";
- export async function wait(ms) {
-   return new Promise((resolve) => setTimeout(resolve, ms));
- }
+
 export async function PagPresContact({ params }) {
-    await wait(10000);
   const session = await getServerSession(options);
   if (!session) {
     redirect("/");
